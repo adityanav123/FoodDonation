@@ -10,10 +10,10 @@
   <link rel="stylesheet" href="{% static 'portal/styleMainPage.css' %}">
 </head>
 <body>
-	<form action = "http://www.facebook.com">
+	<form>
   	  <div class="container">
 	  	<button type = "submit" class = "btn btn2" formaction = "{% url 'mainPage'%}" > Donor </button>
-		<button class = "btn btn3"> Reciever </button>
+		<button type = "submit" class = "btn btn3" formaction = "{% url 'mainPage'%}"> Reciever </button>
   	  </div>
 	</form>
 </body>
