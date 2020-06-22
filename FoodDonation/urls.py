@@ -16,8 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from portal import views as portal_view
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('portal.urls')),
     path('main/', portal_view.main, name = 'mainPage'),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
