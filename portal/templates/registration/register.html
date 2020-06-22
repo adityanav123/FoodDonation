@@ -1,0 +1,15 @@
+
+<h2> Registration page </h2>
+
+<form method = "POST" action = "{% url 'register' %}">
+	{% csrf_token %}
+	
+	{% if form.errors %} 
+	<p> there are errors in the form
+	{% endif %}
+	
+	{{form}}
+	
+	<button type = 'submit' class="btn btn2"> Register </button>
+	
+</form >
