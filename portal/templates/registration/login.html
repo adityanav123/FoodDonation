@@ -1,0 +1,16 @@
+<h1> this is the login page </h1>
+
+{% if form.errors %}
+	<p> sorry, somethings wrong </p>
+{% endif %}
+
+{% if next %}
+	<p> you cannot access this page! </p>
+{% endif %}
+
+<form method = "post" action = "{% url 'login' %}">
+	{% csrf_token %}
+	<p>username - {{ form.username }} <br> </p>
+	<p>password - {{ form.password }} <br> </p>
+	<input type = "submit" value = "login">
+</form>	
