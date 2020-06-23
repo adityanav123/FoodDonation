@@ -16,12 +16,15 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from portal import views as portal_view
+#from portal import views as portal_view
+from django.contrib.auth import views as auth_views # for login logout.
+from django.views.generic.base import TemplateView
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('portal.urls')),
-    path('main/', portal_view.main, name='mainPage'),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('', TemplateView.as_view(template_name = 'home.html'), name = 'home'),
+    path('users/', include('customUser.urls')),
+    path('users/', include('django.contrib.auth.urls')),
 ]
