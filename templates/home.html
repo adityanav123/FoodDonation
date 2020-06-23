@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+		
+{% block title %} Home Page {% endblock %}
+
+<h1> hello </h1>
+
+{% block content %}
+	{% if user.is_authenticated %}
+		Hello {{ user.username }},
+		 <br> Your given information is as follows - <br> <hr>
+
+		 	{% if user.user_type == 0 %}
+				User Type: Donor<br>
+				Availibilty: {{ user.resources }} <br>
+			{% else %}
+				User Type: Reciever<br>
+				Requirement: {{user.resources}} <br>
+			{% endif %}
+
+			Locality: {{ user.locality }} <br>
+			City: {{ user.city }} <br>
+			Pin-Code: {{ user.pin_code }} <br>
+			Contact: {{ user.contact_no }} <br> <hr>
+
+			<a href = "{% url 'logout' %}"> Logout </a>
+	{% else %}
+	<br>
+		<p> You are not logged in! </p>
+		<a href = "{% url 'login' %}"> login </a> <br>
+		<a href = "{% url 'signup' %}"> signup </a> <br>
+	{% endif %}
+
+{% endblock %}
