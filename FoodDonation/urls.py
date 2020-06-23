@@ -16,7 +16,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
-from portal import views as portal_view
+#from portal import views as portal_view
 from django.contrib.auth import views as auth_views # for login logout.
 from django.views.generic.base import TemplateView
 
