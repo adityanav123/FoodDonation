@@ -1,14 +1,17 @@
 {% extends 'base.html' %}
+{% load crispy_forms_tags %}
 		
 {% block title %} Home Page {% endblock %}
 
 <h1> hello </h1>
 
 {% block content %}
-	{% if user.is_authenticated %}
-		Hello {{ user.username }},
-		 <br> Your given information is as follows - <br> <hr>
 
+<div class = "container-fluid" style="border:2px solid #36160F;">
+	{% if user.is_authenticated %}
+			Hello {{ user.username }} 
+		 <br> Your given information - <br> <hr>
+		 <!-- <div class = "container-fluid" style="border:1px solid #36160F;"> -->
 		 	{% if user.user_type == 0 %}
 				User Type: Donor<br>
 				Availibilty: {{ user.resources }} <br>
@@ -21,13 +24,28 @@
 			City: {{ user.city }} <br>
 			Pin-Code: {{ user.pin_code }} <br>
 			Contact: {{ user.contact_no }} <br> <hr>
-
-			<a href = "{% url 'logout' %}"> Logout </a>
+</div>
+<br> 
+			<form method = "post" action = "{% url 'logout' %}">
+				{% csrf_token %}
+				<button type = "submit" class = "btn btn-success"> logout</button>
+			</form>
+		
 	{% else %}
+	<div class = "container-fluid">
 	<br>
-		<p> You are not logged in! </p>
-		<a href = "{% url 'login' %}"> login </a> <br>
-		<a href = "{% url 'signup' %}"> signup </a> <br>
+		<h4> You are not logged in! </h4>
+		<form method = "post" action = "{% url 'login' %}">
+			{% csrf_token %}
+			<button class = "btn btn-success" type = "submit"> Login </button>
+			<button class = "btn btn-success" type = "submit" formaction="{% url 'signup' %}"> Sign Up </button>
+		</form>
+		
+
+		<!-- <a href = "{% url 'login' %}"> login </a> <br>
+		<a href = "{% url 'signup' %}"> signup </a> <br> -->
+	</div>
 	{% endif %}
+
 
 {% endblock %}
