@@ -19,12 +19,12 @@ from django.urls import path, include
 #from portal import views as portal_view
 from django.contrib.auth import views as auth_views # for login logout.
 from django.views.generic.base import TemplateView
-
-
+#from customUser import views as user_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', TemplateView.as_view(template_name = 'home.html'), name = 'home'),
     path('users/', include('customUser.urls')),
     path('users/', include('django.contrib.auth.urls')),
+    #path('edit_user/', user_view.edit_form, name = 'edit_form'),
 ]

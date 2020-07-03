@@ -7,12 +7,20 @@
 {% block content %}
 <h2> <kbd> Sign Up </kbd> </h2>
 <div class = "container-fluid" style="border:1px solid #36160F;">
-<p> ** user_type field has two options only -> 0 for Donor and 1 for receiver  </p>
+<p> ** user_type field has two options only -> 0 for Donor and 1 for receiver <br> 
+	** can login as an organisation, fill accordingly.
+ </p>
 <form method = "post">
 	{% csrf_token %}
 	{{ form | crispy }}
 	<button type = "submit" class = "btn btn-success"> Sign Up </button>
 	<!-- <button type = "submit" class = "btn btn-small" formaction = "{% url 'login' %}"> Login? </button> -->
 </form>
+
+<form method = "post" action = "{% url 'login' %}">
+	{% csrf_token %}	
+	<button type = "submit" class = "btn btn-small"> Not a New User? Login </button>
+</form>
+
 </div>
 {% endblock %}

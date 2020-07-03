@@ -8,6 +8,9 @@ class CustomUser(AbstractUser):
     resources = models.IntegerField(null = True) # no. of persons avability/requirement
     locality = models.CharField(max_length = 100)
     city = models.CharField(max_length = 50)
+    """CHOICES=[('0','Donor'),
+                     ('1','Reciever')]"""
     user_type = models.IntegerField(null = True) # 0 - Donor 1 - Reciever
+    #user_type = models.ChoiceField(choices = CHOICES, widget = models.RadioSelect)
     def __str__(self):
         return self.username

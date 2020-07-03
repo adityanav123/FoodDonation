@@ -13,11 +13,11 @@
 		 <br> Your given information - <br> <hr>
 		 <!-- <div class = "container-fluid" style="border:1px solid #36160F;"> -->
 		 	{% if user.user_type == 0 %}
-				User Type: Donor<br>
-				Availibilty: {{ user.resources }} <br>
+				You are a "Donor"<br>
+				Food Packets available for - {{ user.resources }} People.<br>
 			{% else %}
 				User Type: Reciever<br>
-				Requirement: {{user.resources}} <br>
+				Food Packets Required for - {{user.resources}} People.<br>
 			{% endif %}
 
 			Locality: {{ user.locality }} <br>
@@ -28,13 +28,18 @@
 <br> 
 			<form method = "post" action = "{% url 'logout' %}">
 				{% csrf_token %}
-				<button type = "submit" class = "btn btn-success"> logout</button>
+				<button type = "submit" class = "btn btn-success"> Logout</button>
+				
+			</form>
+
+			<form method = "get" action = "{% url 'edit_profile' %}">
+				<button type = "submit" class = "btn btn-success"> Edit Profile</button>
 			</form>
 		
 	{% else %}
 	<div class = "container-fluid">
 	<br>
-		<h4> You are not logged in! </h4>
+		<h4> You are not logged in! <br> <br>  </h4>
 		<form method = "post" action = "{% url 'login' %}">
 			{% csrf_token %}
 			<button class = "btn btn-success" type = "submit"> Login </button>

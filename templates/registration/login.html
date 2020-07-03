@@ -11,5 +11,12 @@
 	 {{ form | crispy }}
 	 <button type = "submit" class = "btn btn-success"> Login </button>
  </form>
+
+<form method = "post" action = "{% url 'signup' %}">
+	{% csrf_token %}
+	<button type = "submit" class = "btn btn-small"> New User? Register Here </button>
+	<!-- <button type = "submit" class = "btn btn-small" formaction="{% url 'home' %}"> Redirect to Main Page </button> -->
+</form>
+
 </div>
 {% endblock %}
