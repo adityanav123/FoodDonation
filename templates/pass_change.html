@@ -8,11 +8,11 @@
 <p> under construction .. </p>
 <form method = "post" action = "{% url 'logout' %}">
 	{% csrf_token %}
-	<button type = "submit" class = "btn btn-outline-sucess"> Logout!! </button>
+	<button type = "submit" class = "btn btn-outline-danger"> Logout </button>
 </form>
 
 <form method = "post" action = "{% url 'homePage' %}">
 		{% csrf_token %}
-		<button type = "submit" class = "btn btn-outline-sucess"> To the Home Page </button>
+		<button type = "submit" class = "btn btn-success"> To the Home Page </button>
 	</form>
 {% endblock %}

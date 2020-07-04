@@ -18,5 +18,11 @@
 	<!-- <button type = "submit" class = "btn btn-small" formaction="{% url 'home' %}"> Redirect to Main Page </button> -->
 </form>
 
+<form method = "post" action = "{% url 'change_password' %}">
+	{% csrf_token%}
+	<button type = "submit" class = "btn btn-outline-small"> Forgot password? </button>
+
+</form>
+
 </div>
 {% endblock %}
