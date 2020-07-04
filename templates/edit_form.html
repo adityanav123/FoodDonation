@@ -12,8 +12,12 @@
 <form method = "post">
 	{%csrf_token%}
 	{{ form | crispy }}
-	<button type = "submit" class = "btn btn-outline-success"> Submit </button>
-	
+	<button type = "submit" class = "btn btn-outline-success"> Update </button>
 </form>
+
+<form method = "post" action = "{% url 'homePage' %}">
+		{% csrf_token %}
+		<button type = "submit" class = "btn btn-success"> To the Home Page </button>
+	</form>
 
 {% endblock %}

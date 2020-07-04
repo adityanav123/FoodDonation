@@ -27,5 +27,5 @@ location2 = locator.geocode(place2)
 i1 = (location1.latitude, location1.longitude)
 i2 = (location2.latitude, location2.longitude)
 
-print("distance between them - ", int(geodesic(i1, i2).m))
+print("distance between them(int km) :- ", int(geodesic(i1, i2).km))
 #print(location.longitude, ' - ', location.latitude)

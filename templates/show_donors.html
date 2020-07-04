@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% block title %} Show Donors {% endblock %}
+
+{% block content %}
+	<!-- <h4> Shows the table for donor accounts in the current city of the current login reciever. </h4> -->
+
+	<h5> Your location is - <kbd> {{ you.locality }}, {{ you.city }} </kbd> </h5> <br>
+	<h6> Your Requirement = {{ you.resources }} </h6>
+
+
+	<p> all donors in your city with your available requirements -  </p>
+	{% for i in donors %}
+		{% if i.username != 'admin' and i.resources >= you.resources and i.user_type == 0 %}
+		<li> {{ i.username }} [available - {{i.resources}}]</li>
+		{% endif %}
+	
+	{% endfor %}
+	<br> <br> 
+	
+	<form method = "get" action = "{% url 'edit_profile' %}">
+		{% csrf_token %}
+		<button type = "submit" class = "btn btn-success"> Update Your Account </button>
+	</form>
+
+	<form method = "post" action = "{% url 'homePage' %}">
+		{% csrf_token %}
+		<button type = "submit" class = "btn btn-success"> To the Home Page </button>
+	</form>
+{% endblock %}
