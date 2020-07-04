@@ -7,10 +7,10 @@ from .models import CustomUser
 
 
 ## JUST TRYING 
-from geopy.distance import geodesic
+"""from geopy.distance import geodesic
 from geopy.geocoders import Nominatim
 locator = Nominatim(user_agent = "myGeocoder")
-
+"""
 ##
 
 
@@ -20,7 +20,7 @@ class SignUpView(CreateView):
     template_name = 'signup.html'
 
 
-@login_required(login_url="{% url 'login'%}")
+@login_required(login_url="/users/login")
 def edit_profile(request):
 	if request.method == "POST":
 		form = CustomUserChangeForm(request.POST, instance = request.user)
@@ -34,8 +34,7 @@ def edit_profile(request):
 		context = {'form' : form }
 		return render(request, 'edit_form.html', context)
 
-
-@login_required(login_url="{% url 'login'%}")
+#@login_required(login_url="/users/login")
 def pass_change(request):
 	#return HttpResponse("<h2> <kbd> password change page - under constuction.</kbd></h2> <br>")
 	return render(request, 'pass_change.html')
