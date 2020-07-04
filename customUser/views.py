@@ -3,7 +3,16 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-# Create your views here.
+from .models import CustomUser
+
+
+## JUST TRYING 
+from geopy.distance import geodesic
+from geopy.geocoders import Nominatim
+locator = Nominatim(user_agent = "myGeocoder")
+
+##
+
 
 class SignUpView(CreateView):
     form_class = CustomUserCreationForm
@@ -30,4 +39,21 @@ def edit_profile(request):
 def pass_change(request):
 	#return HttpResponse("<h2> <kbd> password change page - under constuction.</kbd></h2> <br>")
 	return render(request, 'pass_change.html')
+
+
+
+def show_nearby_donors(request):
+	you = request.user
+	you_address = you.locality + ',' + you.city
+	#your_location = locator.geocode(you_address)
+	donors = CustomUser.objects.filter(city = you.city)
+	return render(request, 'show_donors.html', {'you' : you, 'donors' : donors})
+
+
+def main_page(request): ## TEMPORARY FIX
+	return render(request, 'home.html')
+
+
+
+
  

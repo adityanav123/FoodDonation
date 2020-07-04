@@ -9,14 +9,14 @@
 
 <div class = "container-fluid" style="border:2px solid #36160F;">
 	{% if user.is_authenticated %}
-			Hello {{ user.username }} 
+			Hello <kbd> {{ user.username }} </kbd>
 		 <br> Your given information - <br> <hr>
 		 <!-- <div class = "container-fluid" style="border:1px solid #36160F;"> -->
 		 	{% if user.user_type == 0 %}
 				You are a "Donor"<br>
 				Food Packets available for - {{ user.resources }} People.<br>
 			{% else %}
-				User Type: Reciever<br>
+				You are a "Reciever"<br>
 				Food Packets Required for - {{user.resources}} People.<br>
 			{% endif %}
 
@@ -35,11 +35,18 @@
 			<form method = "get" action = "{% url 'edit_profile' %}">
 				<button type = "submit" class = "btn btn-success"> Edit Profile</button>
 			</form>
+
+			{% if user.user_type == 1 %}
+			<form method = "post" action = "{% url 'showNearbyDonors' %}"> {%csrf_token%}
+				<button type = "submit" class = "btn btn-success"> Show Nearby Donors </button>
+
+			</form>
+			{% endif %}
 		
 	{% else %}
 	<div class = "container-fluid">
 	<br>
-		<h4> You are not logged in! <br> <br>  </h4>
+		<h4> <kbd> You are not logged in! </kbd><br> <br>  </h4>
 		<form method = "post" action = "{% url 'login' %}">
 			{% csrf_token %}
 			<button class = "btn btn-success" type = "submit"> Login </button>
