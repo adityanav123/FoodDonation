@@ -7,4 +7,9 @@
 - For Password Reset Form: https://simpleisbetterthancomplex.com/tutorial/2016/09/19/how-to-create-password-reset-view.html
 
 
+- Password Reset Form (2nd Version) - https://medium.com/@renjithsraj/how-to-reset-password-in-django-bd5e1d6ed652
+
+
+
+
 
