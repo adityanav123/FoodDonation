@@ -5,7 +5,44 @@
 
 <h1> hello </h1>
 
+
+{% block navigation %}
+	<div class = "row">
+	{% if user.is_authenticated %}
+			
+			<div class = "col">
+				<form method = "get" action = "{% url 'edit_profile' %}">
+					<button type = "submit" class = "btn btn-success"> Edit Profile</button>
+				</form>
+			</div>
+
+			{% if user.user_type == 1 %}
+			<div class = "col">
+				<form method = "post" action = "{% url 'showNearbyDonors' %}"> {%csrf_token%}
+					<button type = "submit" class = "btn btn-success"> Show Nearby Donors </button>
+				</form>
+			</div>
+
+			<div class = "col">
+				<form method = "post" action = "{% url 'logout' %}">
+					{% csrf_token %}
+					<button type = "submit" class = "btn btn-outline-danger"> Logout</button>
+				</form>
+			</div>
+			{% endif %}
+	{% else %}
+		<form method = "post" action = "{% url 'login' %}">
+			{% csrf_token %}
+			<button class = "btn btn-success" type = "submit"> Login </button>
+			<button class = "btn btn-success" type = "submit" formaction="{% url 'signup' %}"> Sign Up </button>
+		</form>
+		{% endif %}
+</div>
+{% endblock %}
+
 {% block content %}
+
+	<h1> FOOD DONATION WEBSITE </h1>
 
 <div class = "container-fluid" style="border:2px solid #36160F;">
 	{% if user.is_authenticated %}
@@ -26,36 +63,11 @@
 			Contact: {{ user.contact_no }} <br> <hr>
 </div>
 <br> 
-			<form method = "post" action = "{% url 'logout' %}">
-				{% csrf_token %}
-				<button type = "submit" class = "btn btn-outline-danger"> Logout</button>
-				
-			</form>
-
-			<form method = "get" action = "{% url 'edit_profile' %}">
-				<button type = "submit" class = "btn btn-success"> Edit Profile</button>
-			</form>
-
-			{% if user.user_type == 1 %}
-			<form method = "post" action = "{% url 'showNearbyDonors' %}"> {%csrf_token%}
-				<button type = "submit" class = "btn btn-success"> Show Nearby Donors </button>
-
-			</form>
-			{% endif %}
-		
+			
 	{% else %}
-	<div class = "container-fluid">
 	<br>
+	<div class = "container-fluid">
 		<h4> <kbd> You are not logged in! </kbd><br> <br>  </h4>
-		<form method = "post" action = "{% url 'login' %}">
-			{% csrf_token %}
-			<button class = "btn btn-success" type = "submit"> Login </button>
-			<button class = "btn btn-success" type = "submit" formaction="{% url 'signup' %}"> Sign Up </button>
-		</form>
-		
-
-		<!-- <a href = "{% url 'login' %}"> login </a> <br>
-		<a href = "{% url 'signup' %}"> signup </a> <br> -->
 	</div>
 	{% endif %}
 

@@ -4,15 +4,64 @@
 
 {% block title %} Registration {% endblock %}
 
+{% block navigation %}
+<form method = "post" action = "{% url 'homePage' %}">
+		{% csrf_token %}
+		<button type = "submit" class = "btn btn-success"> To the Home Page </button>
+	</form>
+{% endblock %}
+
 {% block content %}
 <h2> <kbd> Sign Up </kbd> </h2>
 <div class = "container-fluid" style="border:1px solid #36160F;">
-<p> ** user_type field has two options only -> 0 for Donor and 1 for receiver <br> 
-	** can login as an organisation, fill accordingly.
+<p> <strong> <u>  ** user_type field has two options only -> 0 for Donor and 1 for receiver <br> 
+	** can login as an organisation, fill accordingly. </u></strong>
  </p>
 <form method = "post">
 	{% csrf_token %}
-	{{ form | crispy }}
+	<div class = "row">
+		<div class = "col-4">
+			{{ form.username | as_crispy_field }}
+		</div>
+		<div class = "col">
+			{{ form.email | as_crispy_field }}
+		</div>
+	</div>
+
+	<!-- SECOND ROW  -->
+	<div class = "row">
+		<div class = "col-2">
+			{{form.user_type | as_crispy_field}}
+		</div>
+		<div class = "col-3">
+			{{form.resources | as_crispy_field}}
+		</div>
+		<div class = "col">
+			{{form.locality | as_crispy_field}}
+		</div>
+		<div class = "col">
+			{{form.city | as_crispy_field}}
+		</div>
+	</div>
+
+	<!-- THIRD ROW  -->
+	<div class = "row">
+		<div class = "col-2">
+			{{form.pin_code | as_crispy_field}}
+		</div>
+		<div class = "col-3">
+			{{form.contact_no | as_crispy_field}}
+		</div>
+	</div>
+
+	<div class = "row">
+		<div class = "col">
+			{{form.password1 | as_crispy_field}}
+		</div>
+		<div class = "col">
+			{{form.password2 | as_crispy_field}}
+		</div>
+	</div>
 	<button type = "submit" class = "btn btn-success"> Sign Up </button>
 	<!-- <button type = "submit" class = "btn btn-small" formaction = "{% url 'login' %}"> Login? </button> -->
 </form>

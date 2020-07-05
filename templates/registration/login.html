@@ -3,6 +3,13 @@
 {% load crispy_forms_tags %}
 {% block title %} Login {% endblock %}
 
+{% block navigation %}
+<form method = "post" action = "{% url 'homePage' %}">
+		{% csrf_token %}
+		<button type = "submit" class = "btn btn-success"> To the Home Page </button>
+	</form>
+{% endblock %}
+
 {% block content %}
  <h2> <kbd> Login </kbd> </h2>
  <div class = "container-fluid" style="border:1px solid #36160F;">
@@ -11,18 +18,21 @@
 	 {{ form | crispy }}
 	 <button type = "submit" class = "btn btn-success"> Login </button>
  </form>
-
+<div class = "row">
+	<div class = "col-3">
 <form method = "post" action = "{% url 'signup' %}">
 	{% csrf_token %}
-	<button type = "submit" class = "btn btn-small"> New User? Register Here </button>
-	<!-- <button type = "submit" class = "btn btn-small" formaction="{% url 'home' %}"> Redirect to Main Page </button> -->
+	<button type = "submit" class = "btn btn-small btn-sm"> New User? Register Here </button>
 </form>
+</div>
+<div class = "col">
 
 <form method = "post" action = "{% url 'change_password' %}">
 	{% csrf_token%}
-	<button type = "submit" class = "btn btn-outline-small"> Forgot password? </button>
+	<button type = "submit" class = "btn btn-outline-small btn-sm"> Forgot password? </button>
 
 </form>
-
+</div>
+</div>
 </div>
 {% endblock %}
