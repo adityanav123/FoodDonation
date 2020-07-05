@@ -3,13 +3,14 @@
 		
 {% block title %} Home Page {% endblock %}
 
-<h1> hello </h1>
 
 
 {% block navigation %}
 	<div class = "row">
 	{% if user.is_authenticated %}
 			
+
+
 			<div class = "col">
 				<form method = "get" action = "{% url 'edit_profile' %}">
 					<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Edit Profile</strong></button>
@@ -48,6 +49,7 @@
 
 <div class = "container-fluid" style="border:2px solid #36160F;">
 	{% if user.is_authenticated %}
+
 			Hello <kbd> {{ user.username }} </kbd>
 		 <br> Your given information - <br> <hr>
 		 <!-- <div class = "container-fluid" style="border:1px solid #36160F;"> -->
@@ -64,6 +66,15 @@
 			Pin-Code: {{ user.pin_code }} <br>
 			Contact: {{ user.contact_no }} <br> <hr>
 </div>
+<!-- TRYING ALERT!!! -->
+<br>
+
+      <div class="alert alert-danger alert-dismissible fade show">
+   <strong> please change the location on profile if logging in from a different location!! <br> 
+          Edit location here - <a href = "{% url 'edit_profile' %}"> edit </a> or located on the navigation bar as <u>Edit Profile </u>!
+        </strong>
+        <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
+  </div>
 <br> 
 			
 	{% else %}
@@ -73,5 +84,8 @@
 	</div>
 	{% endif %}
 
+		
 
 {% endblock %}
+
+
