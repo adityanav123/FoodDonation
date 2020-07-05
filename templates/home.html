@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base_with_home.html' %}
 {% load crispy_forms_tags %}
 		
 {% block title %} Home Page {% endblock %}
@@ -12,32 +12,34 @@
 			
 			<div class = "col">
 				<form method = "get" action = "{% url 'edit_profile' %}">
-					<button type = "submit" class = "btn btn-success"> Edit Profile</button>
+					<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Edit Profile</strong></button>
 				</form>
 			</div>
 
 			{% if user.user_type == 1 %}
 			<div class = "col">
 				<form method = "post" action = "{% url 'showNearbyDonors' %}"> {%csrf_token%}
-					<button type = "submit" class = "btn btn-success"> Show Nearby Donors </button>
-				</form>
-			</div>
-
-			<div class = "col">
-				<form method = "post" action = "{% url 'logout' %}">
-					{% csrf_token %}
-					<button type = "submit" class = "btn btn-outline-danger"> Logout</button>
+					<button type = "submit" class = "btn btn-outline-dark navbar-btn"><strong> Nearby Donors </strong> </button>
 				</form>
 			</div>
 			{% endif %}
+			<div class = "col">
+				<form method = "post" action = "{% url 'logout' %}">
+					{% csrf_token %}
+					<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Logout</strong></button>
+				</form>
+			</div>
 	{% else %}
 		<form method = "post" action = "{% url 'login' %}">
 			{% csrf_token %}
-			<button class = "btn btn-success" type = "submit"> Login </button>
-			<button class = "btn btn-success" type = "submit" formaction="{% url 'signup' %}"> Sign Up </button>
+			<button class = "btn btn-outline-dark navbar-btn" type = "submit"><strong>  Login </strong> </button>
+			<button class = "btn btn-outline-dark navbar-btn" type = "submit" formaction="{% url 'signup' %}"><strong> Sign Up</strong> </button>
 		</form>
+				
 		{% endif %}
-</div>
+
+
+				</div>
 {% endblock %}
 
 {% block content %}

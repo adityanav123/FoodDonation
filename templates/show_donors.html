@@ -7,13 +7,13 @@
 		<div class = "col">
 			<form method = "get" action = "{% url 'edit_profile' %}">
 				{% csrf_token %}
-				<button type = "submit" class = "btn btn-success"> Update Your Account </button>
+				<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Update Your Account </strong></button>
 			</form>
 		</div>
 		<div class = "col">
 	<form method = "post" action = "{% url 'homePage' %}">
 		{% csrf_token %}
-		<button type = "submit" class = "btn btn-success"> To the Home Page </button>
+		<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> To the Home Page </strong></button>
 	</form>
 </div>
 	</div>
@@ -34,6 +34,26 @@
 	
 	{% endfor %}
 	<br> <br> 
-	
-	
+
+	<!--  MAPS TRY!!! 
+	<div id='map' style='width: 400px; height: 300px;'></div>
+	<script>
+		mapboxgl.accessToken = 'pk.eyJ1IjoiYWRpdHlhbmF2cGh1bGUiLCJhIjoiY2tjOHB4c2h4MDUxNTJybGtldDdmMHZscyJ9.EPRqCAsAVwUFTncfyoCr9w';
+		var map = new mapboxgl.Map({
+							container: 'map',
+							style: 'mapbox://styles/mapbox/streets-v11',
+							"center": [24.9345886, 75.5883278],
+							"cursor_style": 'pointer',
+            "marker_color": "red",
+            "rotate": False,
+            "geocoder": True,
+            "fullscreen_button": True,
+            "navigation_buttons": True,
+            "track_location_button": True,
+            "readonly": True,
+            "placeholder": "Pick a location on map below",
+						});
+	</script> -->
 {% endblock %}
+
+<!-- MAPS TRY!!! -->
