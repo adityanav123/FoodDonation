@@ -37,7 +37,7 @@ def edit_profile(request):
 #@login_required(login_url="/users/login")
 def pass_change(request):
 	#return HttpResponse("<h2> <kbd> password change page - under constuction.</kbd></h2> <br>")
-	return render(request, 'pass_change.html')
+	return render(request, 'password_reset.html')
 
 
 

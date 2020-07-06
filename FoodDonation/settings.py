@@ -133,6 +133,21 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 
-#EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
+EMAIL_HOST_PASSWORD = 'sjfxkkngwynxsywl'
+
+DEFAULT_FROM_EMAIL = 'Aditya <food_donation@appleid.in>'
+SMTP_ENABLED = True
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = "smtp.gmail.com"
+
+EMAIL_PORT = 587
+
+
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = "adityanavphule122@gmail.com"
 

@@ -27,7 +27,7 @@
 </div>
 <div class = "col">
 
-<form method = "post" action = "{% url 'change_password' %}">
+<form method = "post" action = "{% url 'password_reset' %}">
 	{% csrf_token%}
 	<button type = "submit" class = "btn btn-outline-small btn-sm"> Forgot password? </button>
 

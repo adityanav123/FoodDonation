@@ -60,15 +60,17 @@
 		<div class = "col-3">
 			{{form.contact_no | as_crispy_field}}
 		</div>
-		<div class = "col-6">
-			{{form.password | as_crispy_field}}
-		</div>
 	</div>
 
 
 	<button type = "submit" class = "btn btn-outline-success"> Update </button>
 </form>
 </div>
+
+<form method = "post" action = "{% url 'password_reset' %}">
+	{% csrf_token %}
+	<button type = "submit" class = "btn btn-outline-success"> Change Password </button>
+</form>
 
 
 {% endblock %}
