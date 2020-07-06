@@ -1,7 +1,7 @@
 {% extends 'base_with_home.html' %}
 {% load crispy_forms_tags %}
 		
-{% block title %} Home Page {% endblock %}
+{% block title %} Food Donation/Home {% endblock %}
 
 
 
@@ -55,10 +55,10 @@
 		 <!-- <div class = "container-fluid" style="border:1px solid #36160F;"> -->
 		 	{% if user.user_type == 0 %}
 				You are a "Donor"<br>
-				Food Packets available for - {{ user.resources }} People.<br>
+				Food Packets available for - <strong> {{ user.resources }} </strong> People.<br>
 			{% else %}
 				You are a "Reciever"<br>
-				Food Packets Required for - {{user.resources}} People.<br>
+				Food Packets Required for - <strong> {{user.resources}} </strong> People.<br>
 			{% endif %}
 
 			Locality: {{ user.locality }} <br>
