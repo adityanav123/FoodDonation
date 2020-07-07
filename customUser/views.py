@@ -57,8 +57,12 @@ def main_page(request): ## TEMPORARY FIX
 def updateResources(request,emailid):
 	you = request.user
 	them = CustomUser.objects.get(email = emailid)
-	them.resources-=you.resources
-	you.resources = 0
+	if them.resources < you.resources:
+		them.resources = 0
+		you.resources -= them.resources
+	else:
+		them.resources-=you.resources
+		you.resources = 0
 	them.save()
 	you.save()
 	return redirect("showNearbyDonors")

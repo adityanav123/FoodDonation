@@ -38,7 +38,7 @@
 			</thead>
 			<tbody>
 	{% for i in donors %}
-		{% if i.username != 'admin' and i.resources >= you.resources and i.user_type == 0 %}
+		{% if i.username != 'admin' and i.user_type == 0 %}
 		<!-- CREATING TABLE  -->
 
 				<tr>
