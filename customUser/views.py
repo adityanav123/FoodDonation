@@ -6,12 +6,38 @@ from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser
 
 
+## TRYING WHATSAPP MESSAGE
+# import os
+# from twilio.rest import Client
+# auth_token = '33a3dfa60c52cc7e52f0877421c59343'
+# account_sid = 'ACe5c1b1ebc45b9158edbe05e5f173bbfe'
+# client = Client(account_sid,auth_token)
+
+
 ## JUST TRYING 
 """from geopy.distance import geodesic
 from geopy.geocoders import Nominatim
 locator = Nominatim(user_agent = "myGeocoder")
 """
 ##
+
+
+## FAST 2 SMS API USE 
+# import requests, json
+
+# def send_sms(number, message):
+# 	url = 'https://www.fast2sms.com/dev/bulk'
+# 	params = {
+# 		'authorization' : '9inWm8qQp6Os12DgwxrR4yZkhajoVNYbtF50BLMdcATKGEfeXPotOgyPHXnA7vE2frUMscT13iNe8IRh',
+# 		'sender_id' : 'FSTSMS',
+# 		'message' : message,
+# 		'numbers' : number,
+# 		'route' : 'p'
+# 	}
+# 	requests.get(url, params = params)
+
+
+
 
 
 class SignUpView(CreateView):
@@ -56,16 +82,25 @@ def main_page(request): ## TEMPORARY FIX
 @login_required(login_url="/users/login")
 def updateResources(request,emailid):
 	you = request.user
+	req = 0
 	them = CustomUser.objects.get(email = emailid)
 	if them.resources < you.resources:
 		you.resources -= them.resources
+		# req = them.resources
 		them.resources = 0
 	else:
 		them.resources-=you.resources
+		# req = you.resources
 		you.resources = 0
 	them.save()
 	you.save()
+	# send_number = '' + str(them.contact_no)
+	# reciver_name = you.username
+	# message = reciver_name + ' requested Food for ' + str(req) + ' people!. \nKindly deliver accordingly,\nThank You \n- FoodDonation Team.'
+	# client.messages.create(body = message, from_ = 'whatsapp:+14155238886', to = 'whatsapp:+91' + str(them.contact_no))
+	# send_sms(send_number, message)
 	return redirect("showNearbyDonors")
+	#+14155238886
 
 
 
