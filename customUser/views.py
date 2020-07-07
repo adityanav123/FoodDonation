@@ -53,6 +53,17 @@ def main_page(request): ## TEMPORARY FIX
 	return render(request, 'home.html')
 
 
+@login_required(login_url="/users/login")
+def updateResources(request,emailid):
+	you = request.user
+	them = CustomUser.objects.get(email = emailid)
+	them.resources-=you.resources
+	you.resources = 0
+	them.save()
+	you.save()
+	return redirect("showNearbyDonors")
+
+
 
 
  

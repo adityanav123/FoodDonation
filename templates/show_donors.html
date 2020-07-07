@@ -31,6 +31,7 @@
 			<thead>
 				<tr>
 					<th scope="col"> Person/Organisation </th>
+					<th scope="col"> Location </th>
 					<th scope="col"> Resources available </th>
 					<th scope ="col"> Request Link </th>
 				</tr>
@@ -42,9 +43,12 @@
 
 				<tr>
 				<th scope="row"> {{ i.username }}  </th>
+				<th scope="row"> {{ i.locality }} </th>
 				<th scope="row"> {{ i.resources }} </th>
 				<th scope="row"> 
-					<button class = "btn btn-outline-dark"> Request </button>
+					<form method = "get" action = "{% url 'update_requirements' i.email %}"> {% csrf_token %}
+						<button class = "btn btn-outline-primary"> Request </button>
+					</form>
 				</th>
 			</tr>
 			
