@@ -23,16 +23,39 @@
 	<!-- <h4> Shows the table for donor accounts in the current city of the current login reciever. </h4> -->
 
 	<h5> Your location is - <kbd> {{ you.locality }}, {{ you.city }} </kbd> </h5> <br>
-	<h6> Your Requirement = {{ you.resources }} </h6>
+	<h6> <strong> Requirements for - <kbd> {{ you.resources }}</kbd> people.</strong></h6>
 
 
-	<p> all donors in your city with your available requirements -  </p>
+	<p> Donors in your city with your available requirements -  </p>
+	<table class = "table">
+			<thead>
+				<tr>
+					<th scope="col"> Person/Organisation </th>
+					<th scope="col"> Resources available </th>
+					<th scope ="col"> Request Link </th>
+				</tr>
+			</thead>
+			<tbody>
 	{% for i in donors %}
 		{% if i.username != 'admin' and i.resources >= you.resources and i.user_type == 0 %}
-		<li> {{ i.username }} [available - {{i.resources}}]</li>
+		<!-- CREATING TABLE  -->
+
+				<tr>
+				<th scope="row"> {{ i.username }}  </th>
+				<th scope="row"> {{ i.resources }} </th>
+				<th scope="row"> 
+					<button class = "btn btn-outline-dark"> Request </button>
+				</th>
+			</tr>
+			
+
+
+		<!-- <li> {{ i.username }} [available - {{i.resources}}]</li> -->
 		{% endif %}
 	
 	{% endfor %}
+	</tbody>
+			</table>
 	<br> <br> 
 
 	<!--  MAPS TRY!!! 

@@ -50,7 +50,7 @@
 <div class = "container-fluid" style="border:2px solid #36160F;">
 	{% if user.is_authenticated %}
 
-			Hello <kbd> {{ user.username }} </kbd>
+			Hello <kbd> {{ user.username }}</kbd>
 		 <br> Your given information - <br> <hr>
 		 <!-- <div class = "container-fluid" style="border:1px solid #36160F;"> -->
 		 	{% if user.user_type == 0 %}
@@ -69,7 +69,7 @@
 <!-- TRYING ALERT!!! -->
 <br>
 
-      <div class="alert alert-danger alert-dismissible fade show">
+      <div class="alert alert-warning alert-dismissible fade show">
    <strong> please change the location on profile if logging in from a different location!! <br> 
           Edit location here - <a href = "{% url 'edit_profile' %}"> edit </a> or located on the navigation bar as <u>Edit Profile </u>!
         </strong>
