@@ -58,8 +58,8 @@ def updateResources(request,emailid):
 	you = request.user
 	them = CustomUser.objects.get(email = emailid)
 	if them.resources < you.resources:
-		them.resources = 0
 		you.resources -= them.resources
+		them.resources = 0
 	else:
 		them.resources-=you.resources
 		you.resources = 0
