@@ -134,6 +134,8 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 
 
+## BELOW LOGIC IS FOR EMAIL SENDING - no change here.
+
 EMAIL_HOST_PASSWORD = 'sjfxkkngwynxsywl'
 
 DEFAULT_FROM_EMAIL = 'Aditya <food_donation@appleid.in>'
