@@ -20,7 +20,8 @@
 {% endblock %}
 
 {% block content %}
-	<!-- <h4> Shows the table for donor accounts in the current city of the current login reciever. </h4> -->
+
+	<!-- SOME OBJECTS ARE SENT AS A PARAMETER - SEE customUser/views.py -->
 
 	<h5> Your location is - <kbd> {{ you.locality }}, {{ you.city }} </kbd> </h5> <br>
 	<h6> <strong> Requirements for - <kbd> {{ you.resources }}</kbd> people.</strong></h6>
@@ -46,6 +47,7 @@
 				<th scope="row"> {{ i.locality }} </th>
 				<th scope="row"> {{ i.resources }} </th>
 				<th scope="row"> 
+					<!-- HERE>> PARAMETER PASSED - email id. of the donor, since email is UNIQUE (defined in customUser/models.py), used as primary key to find out the user. -->
 					<form method = "get" action = "{% url 'update_requirements' i.email %}"> {% csrf_token %}
 						<button class = "btn btn-outline-primary"> Request </button>
 					</form>

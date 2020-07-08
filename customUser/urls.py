@@ -31,4 +31,5 @@ urlpatterns = [
 
 
     path('getResource/<emailid>/', views.updateResources, name = 'update_requirements'),
+    ## above url - getResource/<emailid> here , email id denotes the parameter passed. - see templates/show_donors.html
 ]

@@ -39,14 +39,14 @@ locator = Nominatim(user_agent = "myGeocoder")
 
 
 
-
+## SIGN UP VIEW FOR THE SIGN UP PAGE.
 class SignUpView(CreateView):
-    form_class = CustomUserCreationForm
-    success_url = reverse_lazy('login')
+    form_class = CustomUserCreationForm # CUSTOM FORM CREATED FOR THE EXTRA FIELDS.
+    success_url = reverse_lazy('login') # reverse_lazy finds the url for the 'login' page. ["login" is a keyword that is automatically recognised by django.]
     template_name = 'signup.html'
 
 
-@login_required(login_url="/users/login")
+@login_required(login_url="/users/login") # ITS JUST LIKE AN IF STATEMENT, i.e. only users which are logged in can use this function , no one else/
 def edit_profile(request):
 	if request.method == "POST":
 		form = CustomUserChangeForm(request.POST, instance = request.user)
@@ -80,7 +80,7 @@ def main_page(request): ## TEMPORARY FIX
 
 
 @login_required(login_url="/users/login")
-def updateResources(request,emailid):
+def updateResources(request,emailid): # WHEN A REQUEST IS MADE BY THE RECIEVER, IT REDIRECTS HERE, to UPDATE THE RECIVER AND THE DONOR TO WHICH REQUEST IS MADE, THE NOTIFICATION LOGIC WOULD BE PRESENT HERE> JUST BEFORE REDIRECTING IT BACK TO THE PAGE.
 	you = request.user
 	req = 0
 	them = CustomUser.objects.get(email = emailid)

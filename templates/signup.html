@@ -1,3 +1,5 @@
+<!-- SIGN UP PAGE !! -->
+
 {% extends 'base.html' %}
 
 {% load crispy_forms_tags %}
@@ -19,8 +21,9 @@
  </p>
 <form method = "post">
 	{% csrf_token %}
+	<!-- FIRST ROW -->
 	<div class = "row">
-		<div class = "col-4">
+		<div class = "col-4"> <!-- col-value - shows how many column space the input string(here, username) is taking -->
 			{{ form.username | as_crispy_field }}
 		</div>
 		<div class = "col">
@@ -53,7 +56,7 @@
 			{{form.contact_no | as_crispy_field}}
 		</div>
 	</div>
-
+	<!-- FOURTH ROW -->
 	<div class = "row">
 		<div class = "col">
 			{{form.password1 | as_crispy_field}}
@@ -66,7 +69,7 @@
 	<!-- <button type = "submit" class = "btn btn-small" formaction = "{% url 'login' %}"> Login? </button> -->
 </form>
 
-<form method = "post" action = "{% url 'login' %}">
+<form method = "post" action = "{% url 'login' %}"> 
 	{% csrf_token %}	
 	<h6>Already Have an account?</h6><button type = "submit" class = "btn btn-outline-dark btn-sm">Login </button>
 </form>

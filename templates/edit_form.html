@@ -1,12 +1,13 @@
+<!-- THIS IS THE FORM FOR EDIT PROFILE -->
+{% extends 'base.html' %} <!-- : here , extending the base.html file, all the things in the base.html will be copied here -->
 
-{% extends 'base.html' %}
-<!-- {% load static %} -->
+{% load crispy_forms_tags %} <!-- JUST FOR STYLING THE FORMS, USED IN BOOTSTRAP -->
 
-{% load crispy_forms_tags %}
-
-{% block title %} Update Profile {% endblock %}
+{% block title %} Update Profile {% endblock %} <!-- SETTING THE PAGE TITLE  -->
 
 
+
+<!-- INSERTING LINKS IN THE NAVIGATION BAR -->
 {% block navigation %}
 
 <form method = "post" action = "{% url 'homePage' %}">
@@ -17,11 +18,13 @@
 {% endblock %}
 
 {% block content %}
-
-<!-- NAVIGATION BAR -->
+<!-- INSERTING CONTENT IN THE ' CONTENT ' BLOCK IN BASE.html -->
 
 <h2> <kbd> Update Profile </kbd> </h2>
-
+<div class="alert alert-success alert-dismissible fade show">
+   	User Type: <strong> 0 </strong>- Donor  <strong> 1 </strong>- Reciever
+        <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
+  </div>
 <div class = "container">
 <form method = "post">
 	{%csrf_token%}
@@ -71,6 +74,7 @@
 	{% csrf_token %}
 	<button type = "submit" class = "btn btn-outline-success"> Change Password </button>
 </form>
+
 
 
 {% endblock %}
