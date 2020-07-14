@@ -9,6 +9,8 @@
 
 - Password Reset Form (2nd Version) - https://medium.com/@renjithsraj/how-to-reset-password-in-django-bd5e1d6ed652
 
+- For conflicts in pull from github - https://www.git-tower.com/learn/git/faq/solve-merge-conflicts#:~:text=Conflicts%20occur%20when%20the%20same,were%20edited%20in%20that%20file
+
 
 
 
