@@ -12,20 +12,20 @@
 			
 
 
-			<div class = "col-5">
+			<div class = "col">
 				<form method = "get" action = "{% url 'edit_profile' %}">
 					<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Update Profile</strong></button>
 				</form>
 			</div>
 
 			{% if user.user_type == 1 %}
-			<div class = "col-4">
+			<div class = "col">
 				<form method = "post" action = "{% url 'showNearbyDonors' %}"> {%csrf_token%}
 					<button type = "submit" class = "btn btn-outline-dark navbar-btn"><strong> Request </strong> </button>
 				</form>
 			</div>
 			{% endif %}
-			<div class = "col-3">
+			<div class = "col">
 				<form method = "post" action = "{% url 'logout' %}">
 					{% csrf_token %}
 					<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Logout</strong></button>

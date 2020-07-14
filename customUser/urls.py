@@ -9,6 +9,8 @@ urlpatterns = [
     #path('password/', views.pass_change, name = 'change_password'),
     path('showDonor/', views.show_nearby_donors, name = 'showNearbyDonors'),
 
+    #path('messages/', views.show_messages, name = 'notification'),
+
 
     path('password_reset/',
      auth_views.PasswordResetView.as_view(template_name = "registration/password_reset.html"),
