@@ -12,20 +12,20 @@
 			
 
 
-			<div class = "col">
+			<div class = "col-5">
 				<form method = "get" action = "{% url 'edit_profile' %}">
-					<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Edit Profile</strong></button>
+					<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Update Profile</strong></button>
 				</form>
 			</div>
 
 			{% if user.user_type == 1 %}
-			<div class = "col">
+			<div class = "col-4">
 				<form method = "post" action = "{% url 'showNearbyDonors' %}"> {%csrf_token%}
-					<button type = "submit" class = "btn btn-outline-dark navbar-btn"><strong> Nearby Donors </strong> </button>
+					<button type = "submit" class = "btn btn-outline-dark navbar-btn"><strong> Request </strong> </button>
 				</form>
 			</div>
 			{% endif %}
-			<div class = "col">
+			<div class = "col-3">
 				<form method = "post" action = "{% url 'logout' %}">
 					{% csrf_token %}
 					<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Logout</strong></button>
@@ -70,9 +70,10 @@
 <!-- TRYING ALERT!!! -->
 <br>
 
-      <div class="alert alert-warning alert-dismissible fade show">
-   <strong> please change the location on profile if logging in from a different location!! <br> 
+      <div class="alert alert-primary alert-dismissible fade show">
+   <strong> Please change the location on profile if logging in from a different location!! <br> 
           Edit location here - <a href = "{% url 'edit_profile' %}"> edit </a> or located on the navigation bar as <u>Edit Profile </u>!
+       <button type = "button" class = "close" data-dismiss = "alert" aria-hidden="true">&times;</button>
         </strong>
         <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
   </div>

@@ -12,8 +12,15 @@
 
 <form method = "post" action = "{% url 'homePage' %}">
     {% csrf_token %}
-    <button type = "submit" class = "btn btn-outline-dark navbar-btn"><strong>  Go to the Home Page </strong> </button>
+    <button type = "submit" class = "btn btn-outline-dark navbar-btn"><strong> Home </strong> </button>
   </form>
+
+  <div class = "col-3">
+				<form method = "post" action = "{% url 'logout' %}">
+					{% csrf_token %}
+					<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Logout</strong></button>
+				</form>
+			</div>
 
 {% endblock %}
 
