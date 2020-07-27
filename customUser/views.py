@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser
+from .models import CustomUser, Messages
 
 
 ## TRYING WHATSAPP MESSAGE
@@ -76,6 +76,7 @@ def show_nearby_donors(request):
 
 
 def main_page(request): ## TEMPORARY FIX
+	# message = Messages.objects.filter(reciever = request.user)
 	return render(request, 'home.html')
 
 
@@ -86,21 +87,47 @@ def updateResources(request,emailid): # WHEN A REQUEST IS MADE BY THE RECIEVER, 
 	them = CustomUser.objects.get(email = emailid)
 	if them.resources < you.resources:
 		you.resources -= them.resources
-		# req = them.resources
+		req = them.resources
 		them.resources = 0
 	else:
 		them.resources-=you.resources
-		# req = you.resources
+		req = you.resources
 		you.resources = 0
+
+	# HERE WE SHOULD SEND MESSAGE TO THE SENDER ABOUT THE REQUEST.
+	if req > 0:
+		message = 'Hey there!!, I need resources for - ' + str(req) + ' people.'
+		sendRequest = Messages(sender = you, reciever = them, message = message)
+		sendRequest.save()
+	#SEE ASSUMPTIONS IN README.MD!
 	them.save()
 	you.save()
-	# send_number = '' + str(them.contact_no)
-	# reciver_name = you.username
-	# message = reciver_name + ' requested Food for ' + str(req) + ' people!. \nKindly deliver accordingly,\nThank You \n- FoodDonation Team.'
-	# client.messages.create(body = message, from_ = 'whatsapp:+14155238886', to = 'whatsapp:+91' + str(them.contact_no))
-	# send_sms(send_number, message)
 	return redirect("showNearbyDonors")
 	#+14155238886
+
+@login_required(login_url = '/users/login')
+def seeNotifications(request):
+	message = Messages.objects.filter(reciever = request.user)
+	context = { 'messages' : message }
+	return render(request, 'notification.html', context)
+
+@login_required(login_url = '/users/login')
+def deleteNotification(request, pk):
+	message = Messages.objects.get(pk = pk)
+	message.delete()
+	# message = Messages.objects.filter(reciever = request.user)
+	# context = { 'messages' : message }
+	# return render(request, 'notification.html', context)
+	return render(request, 'home.html')
+
+@login_required(login_url = '/users/login')
+def readMessage(request, pk):
+	message = Messages.objects.get(pk = pk)
+	message.read_unread = True
+	message.save()
+	return render(request, 'home.html')
+
+
 
 
 

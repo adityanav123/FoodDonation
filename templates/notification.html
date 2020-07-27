@@ -1,0 +1,53 @@
+{% extends 'base_with_home.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %} {{user.username}}/Messages {% endblock %}
+
+{% block navigation %}
+	<form method = "post" action = "{% url 'homePage' %}">
+		{% csrf_token %}
+		<button class="btn btn-outline-dark"><i class="fa fa-home"> Home</i></button>
+	</form>
+{% endblock %}
+
+{% block content %}
+	<table class = "table">
+			<thead>
+				<tr>
+ 					<th scope="col">  From  </th>
+					<th scope="col"> Message </th>
+					<th scope = "col"></th>
+					<th scope="col"> Delete(<i class="material-icons" style="font-size:16px">eject</i>)/Mark As Read(<i class="material-icons" style="font-size:16px">offline_pin</i>) </th>
+				</tr>
+			</thead>
+			<tbody>
+		{% for i in messages %}
+			<tr>
+				<th scope="row">{{ i.sender.username }}</th>
+				<th scope="row"> {{ i.message }}</th>
+				<th scope = "row">
+					{% if i.read_unread == False %}
+						Unread
+						{%else%}
+						Read
+						{%endif%}
+				</th>
+				<th scope = "row"> 
+					<div class = "row">
+					<div class = "col">
+					<form method = "post" action="{% url 'deleteNotification' i.pk %}"> {%csrf_token%}
+						<button class = "btn btn-outline-success"><i class="material-icons" style="font-size:18px">eject</i></button>
+					</form>
+				</div>
+				<div class = "col">
+					<form method = "post" action="{% url 'readMessage' i.pk %}">{%csrf_token%}
+						<button class = "btn btn-outline-success"><i class="material-icons" style="font-size:18px">offline_pin</i></button>
+					</form>
+				</div>
+			</div>
+				</th>	
+
+			</tr>
+		{% endfor %}
+	
+{% endblock %}
