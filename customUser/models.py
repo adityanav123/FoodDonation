@@ -15,3 +15,12 @@ class CustomUser(AbstractUser):
     #user_type = models.ChoiceField(choices = CHOICES, widget = models.RadioSelect)
     def __str__(self):
         return self.username
+
+
+class Messages(models.Model):
+    sender = models.ForeignKey(CustomUser, on_delete = models.CASCADE, related_name = 'senders')
+    reciever = models.ForeignKey(CustomUser, on_delete = models.CASCADE, related_name = 'recievers')
+    message = models.CharField(max_length = 150)
+    read_unread = models.BooleanField(default = "False") # FALSE - UNREAD
+    def __str__(self):
+        return self.message

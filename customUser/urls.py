@@ -9,7 +9,7 @@ urlpatterns = [
     #path('password/', views.pass_change, name = 'change_password'),
     path('showDonor/', views.show_nearby_donors, name = 'showNearbyDonors'),
 
-    #path('messages/', views.show_messages, name = 'notification'),
+    path('messages/', views.seeNotifications, name = 'notification'),
 
 
     path('password_reset/',
@@ -31,7 +31,9 @@ urlpatterns = [
      auth_views.PasswordResetCompleteView.as_view(template_name = "registration/password_reset_done.html"), 
      name = 'password_reset_complete'),
 
+    path('delete/<pk>/', views.deleteNotification, name = "deleteNotification"),
 
+    path('read/<pk>/', views.readMessage, name = 'readMessage'),
     path('getResource/<emailid>/', views.updateResources, name = 'update_requirements'),
     ## above url - getResource/<emailid> here , email id denotes the parameter passed. - see templates/show_donors.html
 ]
