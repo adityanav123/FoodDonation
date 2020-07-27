@@ -12,6 +12,7 @@
 
 - For conflicts in pull from github - https://www.git-tower.com/learn/git/faq/solve-merge-conflicts#:~:text=Conflicts%20occur%20when%20the%20same,were%20edited%20in%20that%20file
 
+- Using icons in buttons - https://mdbootstrap.com/docs/jquery/content/icons-list/
 
 
 
