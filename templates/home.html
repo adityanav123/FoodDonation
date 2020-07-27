@@ -17,7 +17,7 @@
 				{%csrf_token %}
 
 				<!-- IF ANY NEW REQUESTS -  -->
-				<button class="btn btn-outline-dark"><i class="fa fa-wpforms"> <strong> Notifications </strong></i></button>
+				<button class="btn btn-outline-dark" style="font-size:16px"><i class="fa fa-wpforms"> <strong> Notifications </strong></i></button>
 				<!-- IF NO NEW REQUESTS - -->
 				<!-- <button class = 'btn btn-success'><i class="material-icons" style="font-size:30px;color:darkgreen">event_busy</i></button> -->
 			</form>
@@ -25,7 +25,9 @@
 
 			<div class = "col">
 				<form method = "get" action = "{% url 'edit_profile' %}">
-					<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Update Profile</strong></button>
+					<!-- <strong> Update Profile</strong> -->
+
+					<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Update Profile </strong><i class="material-icons" style="font-size:16px">content_paste</i></button>
 				</form>
 			</div>
 
@@ -39,7 +41,8 @@
 			<div class = "col">
 				<form method = "post" action = "{% url 'logout' %}">
 					{% csrf_token %}
-					<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Logout</strong></button>
+					<!-- <button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Logout</strong> </button> -->
+					<button type = "submit" class = "btn btn-outline-dark"><strong> Logout </button>
 				</form>
 			</div>
 	{% else %}

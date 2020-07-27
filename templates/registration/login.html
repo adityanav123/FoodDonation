@@ -6,7 +6,7 @@
 {% block navigation %}
 	<form method = "post" action = "{% url 'homePage' %}">
 		{% csrf_token %}
-		<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> To the Home Page </strong> </button>
+		<button class="btn btn-outline-dark"><i class="fa fa-home"> Home</i></button>
 	</form>
 {% endblock %}
 
