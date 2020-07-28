@@ -1,7 +1,15 @@
 {% extends 'base_with_home.html' %}
 {% load crispy_forms_tags %}
 		
-{% block title %} Food Donation/Home {% endblock %}
+{% block title %} 
+
+{% if user.is_authenticated %}
+{{ user.username }} / Home 
+{% else %}
+ Food Donation / Home 
+ {% endif %}
+
+{% endblock %}
 
 
 
@@ -17,7 +25,11 @@
 				{%csrf_token %}
 
 				<!-- IF ANY NEW REQUESTS -  -->
-				<button class="btn btn-outline-dark" style="font-size:22px"><i class="fa fa-wpforms"> Messages</i></button>
+				<button class="btn btn-outline-dark" style="font-size:22px"><i class="fa fa-wpforms"> Messages
+					<!-- {% if user.is_authenticated %}
+					<span class="badge">{{message}}
+						{% endif %} -->
+					</span></i></button>
 				<!-- IF NO NEW REQUESTS - -->
 				<!-- <button class = 'btn btn-success'><i class="material-icons" style="font-size:30px;color:darkgreen">event_busy</i></button> -->
 			</form>
@@ -87,10 +99,10 @@
 <br>
 
       <div class="alert alert-primary alert-dismissible fade show">
-   <strong> Please change the location on profile if logging in from a different location!! <br> 
-          Edit location here - <a href = "{% url 'edit_profile' %}"> edit </a> or located on the navigation bar as <u>Update Profile </u>!
+    Please change the location on profile if logging in from a different location!! <br> 
+          Edit location here - <strong> <a href = "{% url 'edit_profile' %}"> edit </a> </strong> or located on the navigation bar as <u>Update Profile </u>!
        <button type = "button" class = "close" data-dismiss = "alert" aria-hidden="true">&times;</button>
-        </strong>
+        
         <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
   </div>
 <br> 

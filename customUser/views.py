@@ -75,8 +75,10 @@ def show_nearby_donors(request):
 	return render(request, 'show_donors.html', {'you' : you, 'donors' : donors})
 
 
+
+## HOME PAGE.. 
 def main_page(request): ## TEMPORARY FIX
-	# message = Messages.objects.filter(reciever = request.user)
+	#message = Messages.objects.filter(reciever = request.user, read_unread = False).count()
 	return render(request, 'home.html')
 
 
@@ -118,14 +120,16 @@ def deleteNotification(request, pk):
 	# message = Messages.objects.filter(reciever = request.user)
 	# context = { 'messages' : message }
 	# return render(request, 'notification.html', context)
-	return render(request, 'home.html')
+	#return render(request, 'home.html')
+	return redirect('notification')
 
 @login_required(login_url = '/users/login')
 def readMessage(request, pk):
 	message = Messages.objects.get(pk = pk)
 	message.read_unread = True
 	message.save()
-	return render(request, 'home.html')
+	#return render(request, 'home.html')
+	return redirect('notification')
 
 
 
