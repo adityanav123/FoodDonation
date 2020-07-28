@@ -6,7 +6,7 @@
 {% block navigation %}
 	<form method = "post" action = "{% url 'homePage' %}">
 		{% csrf_token %}
-		<button class="btn btn-outline-dark"><i class="fa fa-home"> Home</i></button>
+		<button class="btn btn-outline-dark" style="font-size:22px"><i class="fa fa-home"> Home</i></button>
 	</form>
 {% endblock %}
 
@@ -15,15 +15,17 @@
 			<thead>
 				<tr>
  					<th scope="col">  From  </th>
+ 					<th scope="col"> Location </th>
 					<th scope="col"> Message </th>
-					<th scope = "col"></th>
-					<th scope="col"> Delete(<i class="material-icons" style="font-size:16px">eject</i>)/Mark As Read(<i class="material-icons" style="font-size:16px">offline_pin</i>) </th>
+					<th scope = "col">Status</th>
+					<th scope="col"> Delete(<i class="material-icons" style="font-size:16px">eject</i>) / Mark As Read(<i class="material-icons" style="font-size:16px">offline_pin</i>) </th>
 				</tr>
 			</thead>
 			<tbody>
 		{% for i in messages %}
 			<tr>
 				<th scope="row">{{ i.sender.username }}</th>
+				<th scope="row">{{ i.sender.locality }}, {{ i.sender.city }} </th>
 				<th scope="row"> {{ i.message }}</th>
 				<th scope = "row">
 					{% if i.read_unread == False %}

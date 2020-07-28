@@ -96,7 +96,7 @@ def updateResources(request,emailid): # WHEN A REQUEST IS MADE BY THE RECIEVER, 
 
 	# HERE WE SHOULD SEND MESSAGE TO THE SENDER ABOUT THE REQUEST.
 	if req > 0:
-		message = 'Hey there!!, I need resources for - ' + str(req) + ' people.'
+		message = 'Requested resources for ' + str(req) + ' people.'
 		sendRequest = Messages(sender = you, reciever = them, message = message)
 		sendRequest.save()
 	#SEE ASSUMPTIONS IN README.MD!

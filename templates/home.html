@@ -11,17 +11,18 @@
 	<!-- whichever user is currently logged in, it will be transerferred to any link the user clicks, i.e. if the user clicks home.html, user object will automatically be transferred to the page. -->
 			
 		
-
+		{% if user.user_type == 0 %}
 		<div class = "col">
 			<form method="post" action = "{% url 'notification' %}">
 				{%csrf_token %}
 
 				<!-- IF ANY NEW REQUESTS -  -->
-				<button class="btn btn-outline-dark" style="font-size:16px"><i class="fa fa-wpforms"> <strong> Notifications </strong></i></button>
+				<button class="btn btn-outline-dark" style="font-size:22px"><i class="fa fa-wpforms"> Messages</i></button>
 				<!-- IF NO NEW REQUESTS - -->
 				<!-- <button class = 'btn btn-success'><i class="material-icons" style="font-size:30px;color:darkgreen">event_busy</i></button> -->
 			</form>
 		</div>
+		{% endif %}
 
 			<div class = "col">
 				<form method = "get" action = "{% url 'edit_profile' %}">
