@@ -31,6 +31,7 @@ urlpatterns = [
      auth_views.PasswordResetCompleteView.as_view(template_name = "registration/password_reset_done.html"), 
      name = 'password_reset_complete'),
 
+    path('showmap/', views.createMap, name = "maps"),
     path('delete/<pk>/', views.deleteNotification, name = "deleteNotification"),
 
     path('read/<pk>/', views.readMessage, name = 'readMessage'),

@@ -34,6 +34,13 @@
 				<!-- <button class = 'btn btn-success'><i class="material-icons" style="font-size:30px;color:darkgreen">event_busy</i></button> -->
 			</form>
 		</div>
+
+		<div class = "col">
+			<form method = "post" action = "{% url 'maps' %}"> {% csrf_token %}
+				<button class = "btn btn-outline-dark"> map </button>
+			</form>
+		</div>
+
 		{% endif %}
 
 			<div class = "col">

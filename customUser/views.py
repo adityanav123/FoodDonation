@@ -15,10 +15,12 @@ from .models import CustomUser, Messages
 
 
 ## JUST TRYING 
-"""from geopy.distance import geodesic
+from geopy.distance import geodesic
 from geopy.geocoders import Nominatim
 locator = Nominatim(user_agent = "myGeocoder")
-"""
+
+
+
 ##
 
 
@@ -130,6 +132,16 @@ def readMessage(request, pk):
 	message.save()
 	#return render(request, 'home.html')
 	return redirect('notification')
+
+
+@login_required(login_url = '/users/login')
+def createMap(request):
+	user = request.user
+	address = str(user.locality + ', ' + user.city)
+	#url = 'https://nominatim.openstreetmap.org/search/' + urllib.parse.quote(address) +'?format=json'
+	#response = requests.get(url).json()
+	coordinates = locator.geocode(address, timeout = 1000)
+	return render(request, 'maps.html', {'longitude' : str(coordinates.longitude), 'latitude' : coordinates.latitude})
 
 
 
