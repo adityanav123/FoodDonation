@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block title %} MAP COORDINATES {% endblock %}
+
+
+{% block navigation %}
+	<form method = "post" action = "{% url 'homePage' %}">
+		{% csrf_token %}
+		<button class="btn btn-outline-dark" style="font-size:22px"><i class="fa fa-home"> Home</i></button>
+	</form>
+{% endblock %}
+
+{% block content %}
+	<h3> Hello <kbd> {{ user.username }} </kbd> </h3>
+	<hr>
+	Your Location Coordinates - 
+		<br> Longitude : <kbd> {{ longitude }}</kbd> <br>
+		Latitude : <kbd> {{ latitude }} </kbd>
+{% endblock %}
