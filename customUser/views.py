@@ -137,9 +137,7 @@ def readMessage(request, pk):
 @login_required(login_url = '/users/login')
 def createMap(request):
 	user = request.user
-	address = str(user.locality + ', ' + user.city)
-	#url = 'https://nominatim.openstreetmap.org/search/' + urllib.parse.quote(address) +'?format=json'
-	#response = requests.get(url).json()
+	address = str(user.locality + ', ' + user.city + ', ' + str(user.pin_code) + ', ' + user.state)
 	coordinates = locator.geocode(address, timeout = 1000)
 	return render(request, 'maps.html', {'longitude' : str(coordinates.longitude), 'latitude' : coordinates.latitude})
 
