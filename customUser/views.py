@@ -139,8 +139,18 @@ def createMap(request):
 	user = request.user
 	address = str(user.locality + ', ' + user.city + ', ' + str(user.pin_code) + ', ' + user.state)
 	coordinates = locator.geocode(address, timeout = 1000)
-	return render(request, 'maps.html', {'longitude' : str(coordinates.longitude), 'latitude' : coordinates.latitude})
-
+	lat,lang,users = [], [], []
+	near = CustomUser.objects.filter(city = user.city, user_type = 1)
+	merge = ""
+	if user.user_type == 1:
+		ans = CustomUser.objects.filter(city = user.city, user_type = 1)
+		for i in ans:
+			temp_address = str(i.locality + ', ' + i.city + ', ' + str(i.pin_code) + ', ' + i.state)
+			coord = locator.geocode(temp_address, timeout = 1000)
+			lat.append(coord.latitude)
+			lang.append(coord.longitude)
+			users.append(i.username)
+	return render(request, 'maps.html', {'longitude' : coordinates.longitude, 'latitude' : coordinates.latitude,  'lat': lat, 'lang': lang, 'users': users, 'near' : near})
 
 
 

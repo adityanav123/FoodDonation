@@ -1,18 +1,91 @@
-{% extends 'base.html' %}
-{% block title %} MAP COORDINATES {% endblock %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    	<title> food donation / maps </title>
+        <meta charset="utf-8">
+        <!-- Leaflet CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+   integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+   crossorigin=""/>
+
+        <!-- Leaflet JS -->
+        <!-- Make sure you put this AFTER Leaflet's CSS -->
+ <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+   integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+   crossorigin=""></script>
 
 
-{% block navigation %}
-	<form method = "post" action = "{% url 'homePage' %}">
-		{% csrf_token %}
-		<button class="btn btn-outline-dark" style="font-size:22px"><i class="fa fa-home"> Home</i></button>
-	</form>
-{% endblock %}
+        <!-- Set map height -->
+        <style>
+            #mapid { height: 300px; }
+        </style>
+    </head>
+    <body>
 
-{% block content %}
-	<h3> Hello <kbd> {{ user.username }} </kbd> </h3>
-	<hr>
-	Your Location Coordinates - 
-		<br> Longitude : <kbd> {{ longitude }}</kbd> <br>
-		Latitude : <kbd> {{ latitude }} </kbd>
-{% endblock %}
+        <h1>Nearby Receiver</h1>
+        {% if users %}
+        <ul>
+        {% for i in users %}
+            <li>
+            {{ i }}
+            </li>
+        {% endfor %}
+        </ul>
+        {% endif %}
+        <p id = "status"></p>
+        <a id = "map-link" target="_blank"></a>
+
+
+        <!-- map div -->
+        <div id="mapid"></div>
+        <!-- map js  -->
+        <script>
+            var map = L.map('mapid').setView([{{ latitude }}, {{ longitude }}], 17);
+
+
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            }).addTo(map);
+
+            L.marker([{{ latitude }}, {{ longitude }}]).addTo(map)
+                .bindPopup(
+                	'<a href = "{% url 'homePage' %}"> Home </a>'
+                	)
+                .openPopup();
+            mark1=[];
+            mark2=[];
+            var j=0,k=0;
+            {% for i in lat %}
+                mark1[j]={{ i }};
+                j++;
+            {% endfor %}
+             {% for i in lang %}
+                mark2[k]={{ i }};
+                k++;
+            {% endfor %}
+            //document.getElementById("mapid").innerHTML = k;
+
+            for(var m=0;m<mark1.length;m++) {
+                var circle = L.marker([mark1[m],mark2[m]], {
+                   // color: 'black',
+                    //fillColor: '#f03',
+                    //fillOpacity: 2.5,
+                    //radius: 50
+                }).addTo(map);
+            }
+
+        </script>
+        <br>
+        <form method = "post" action = "{% url 'homePage' %}"> {% csrf_token %}
+        	<input type="submit" value = "Home"> </input>
+        </form>
+
+        <ul>
+        	{% for i in near %}
+        		<li> {{ i.username }} - {{ i.locality }} </li>
+        	{% endfor %}
+        </ul>
+
+    </body>
+</html>

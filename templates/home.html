@@ -25,7 +25,7 @@
 				{%csrf_token %}
 
 				<!-- IF ANY NEW REQUESTS -  -->
-				<button class="btn btn-outline-dark" style="font-size:22px"><i class="fa fa-wpforms"> Messages
+				<button class="btn btn-outline-dark" style="font-size:22px"><i class="fa fa-wpforms"> <strong> Messages </strong>
 					<!-- {% if user.is_authenticated %}
 					<span class="badge">{{message}}
 						{% endif %} -->
@@ -37,7 +37,7 @@
 
 		<div class = "col">
 			<form method = "post" action = "{% url 'maps' %}"> {% csrf_token %}
-				<button class = "btn btn-outline-dark"> map </button>
+				<button class = "btn btn-outline-dark"> <strong> Map </strong> </button>
 			</form>
 		</div>
 
@@ -81,7 +81,7 @@
 
 {% block content %}
 
-	<h1> FOOD DONATION WEBSITE </h1>
+	<h1> FOOD DONATION  </h1>
 
 <div class = "container-fluid" style="border:2px solid #36160F;">
 	{% if user.is_authenticated %}
@@ -107,12 +107,12 @@
 
       <div class="alert alert-primary alert-dismissible fade show">
     Please change the location on profile if logging in from a different location!! <br> 
-          Edit location here - <strong> <a href = "{% url 'edit_profile' %}"> edit </a> </strong> or located on the navigation bar as <u>Update Profile </u>!
+          Edit location here -  <u> <a href = "{% url 'edit_profile' %}"> edit </a> </u> or located on the navigation bar as <u>Update Profile </u>!
        <button type = "button" class = "close" data-dismiss = "alert" aria-hidden="true">&times;</button>
         
         <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
   </div>
-<br> 
+<br>
 			
 	{% else %}
 	<br>
