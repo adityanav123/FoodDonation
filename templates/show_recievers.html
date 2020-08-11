@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} Nearby Donors {% endblock %}
+{% block title %} Nearby Recievers {% endblock %}
 
 
 {% block navigation %}
@@ -24,22 +24,23 @@
 	<!-- SOME OBJECTS ARE SENT AS A PARAMETER - SEE customUser/views.py -->
 
 	<h5> Your location is - <kbd> {{ you.locality }}, {{ you.city }} </kbd> </h5> <br>
-	<h6> <strong> Requirements for - <kbd> {{ you.resources }}</kbd> people.</strong></h6>
+	<h6> <strong> You have resources for - <kbd> {{ you.resources }}</kbd> people.</strong></h6>
 
 
-	<p> Donors in  <strong> {{ you.city }}</strong> with your available requirements -  </p>
+	<!-- <p> Donors in  <strong> {{ you.city }}</strong> with your available requirements -  </p> -->
+	<p> People/Organisations who need Food in <strong> {{ you.city }} </strong> </p>
 	<table class = "table">
 			<thead>
 				<tr>
 					<th scope="col"> Person/Organisation </th>
 					<th scope="col"> Location </th>
-					<th scope="col"> Resources available </th>
+					<th scope="col"> Required Resources </th>
 					<th scope ="col"> Request Link </th>
 				</tr>
 			</thead>
 			<tbody>
 	{% for i in donors %}
-		{% if i.username != 'admin' and i.user_type == 0 and i.resources > 0%}
+		{% if i.username != 'admin' and i.user_type == 1 and i.resources > 0%}
 		<!-- CREATING TABLE  -->
 
 				<tr>
@@ -48,7 +49,7 @@
 				<th scope="row"> {{ i.resources }} </th>
 				<th scope="row"> 
 					<!-- HERE>> PARAMETER PASSED - email id. of the donor, since email is UNIQUE (defined in customUser/models.py), used as primary key to find out the user. -->
-					<form method = "get" action = "{% url 'update_requirements' i.email %}"> {% csrf_token %}
+					<form method = "get" action = "{% url 'donation_done' i.email %}"> {% csrf_token %}
 						<button class = "btn btn-outline-primary"> Request </button>
 					</form>
 				</th>

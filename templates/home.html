@@ -19,7 +19,6 @@
 	<!-- whichever user is currently logged in, it will be transerferred to any link the user clicks, i.e. if the user clicks home.html, user object will automatically be transferred to the page. -->
 			
 		
-		{% if user.user_type == 0 %}
 		<div class = "col">
 			<form method="post" action = "{% url 'notification' %}">
 				{%csrf_token %}
@@ -34,14 +33,14 @@
 				<!-- <button class = 'btn btn-success'><i class="material-icons" style="font-size:30px;color:darkgreen">event_busy</i></button> -->
 			</form>
 		</div>
-
+<!-- 
 		<div class = "col">
 			<form method = "post" action = "{% url 'maps' %}"> {% csrf_token %}
 				<button class = "btn btn-outline-dark"> <strong> Map </strong> </button>
 			</form>
-		</div>
+		</div> -->
 
-		{% endif %}
+
 
 			<div class = "col">
 				<form method = "get" action = "{% url 'edit_profile' %}">
@@ -57,7 +56,14 @@
 					<button type = "submit" class = "btn btn-outline-dark navbar-btn"><strong> Request </strong> </button>
 				</form>
 			</div>
+			{% else %}
+			<div class = "col">
+				<form method = "post" action = "{% url 'showNearbyRecievers' %}"> {% csrf_token %}
+					<button type = "submit" class = "btn btn-outline-dark navbar-btn"><strong> Donate</strong> </button>
+				</form>
+			</div>
 			{% endif %}
+
 			<div class = "col">
 				<form method = "post" action = "{% url 'logout' %}">
 					{% csrf_token %}

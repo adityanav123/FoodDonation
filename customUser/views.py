@@ -119,10 +119,6 @@ def seeNotifications(request):
 def deleteNotification(request, pk):
 	message = Messages.objects.get(pk = pk)
 	message.delete()
-	# message = Messages.objects.filter(reciever = request.user)
-	# context = { 'messages' : message }
-	# return render(request, 'notification.html', context)
-	#return render(request, 'home.html')
 	return redirect('notification')
 
 @login_required(login_url = '/users/login')
@@ -130,7 +126,6 @@ def readMessage(request, pk):
 	message = Messages.objects.get(pk = pk)
 	message.read_unread = True
 	message.save()
-	#return render(request, 'home.html')
 	return redirect('notification')
 
 
@@ -155,5 +150,33 @@ def createMap(request):
 
 
 
+@login_required(login_url = "/users/login")
+def show_nearby_recievers(request):
+	you = request.user
+	you_address = you.locality + ',' + you.city
+	#your_location = locator.geocode(you_address)
+	donors = CustomUser.objects.filter(city = you.city)
+	return render(request, 'show_recievers.html', {'you' : you, 'donors' : donors})
+
+@login_required(login_url = "/users/login")
+def donation_done(request, emailid):
+	you = request.user
+	them = CustomUser.objects.get(email = emailid)
+	donationOf = 0 # resources donated.
+	if them.resources >= you.resources:
+		donationOf = them.resources
+		them.resources -= you.resources
+		you.resources = 0
+	else:
+		donationOf = them.resources
+		you.resources -= them.resources
+		them.resources = 0
+	if donationOf > 0:
+		message = "Donation!! - for " + str(donationOf) + ' people'
+		sendRequest = Messages(sender = you, reciever = them, message = message)
+		sendRequest.save()
+	them.save()
+	you.save()
+	return redirect('showNearbyRecievers')
 
  

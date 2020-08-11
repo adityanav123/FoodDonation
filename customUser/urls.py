@@ -8,6 +8,7 @@ urlpatterns = [
     path('edit/', views.edit_profile, name = 'edit_profile'),
     #path('password/', views.pass_change, name = 'change_password'),
     path('showDonor/', views.show_nearby_donors, name = 'showNearbyDonors'),
+    path('showRecievers/', views.show_nearby_recievers, name = 'showNearbyRecievers'),
 
     path('messages/', views.seeNotifications, name = 'notification'),
 
@@ -36,5 +37,6 @@ urlpatterns = [
 
     path('read/<pk>/', views.readMessage, name = 'readMessage'),
     path('getResource/<emailid>/', views.updateResources, name = 'update_requirements'),
+    path('donation/<emailid>/', views.donation_done, name = 'donation_done')
     ## above url - getResource/<emailid> here , email id denotes the parameter passed. - see templates/show_donors.html
 ]
