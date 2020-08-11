@@ -33,12 +33,13 @@
 				<!-- <button class = 'btn btn-success'><i class="material-icons" style="font-size:30px;color:darkgreen">event_busy</i></button> -->
 			</form>
 		</div>
-<!-- 
+		{% if user.user_type == 0 %}
 		<div class = "col">
 			<form method = "post" action = "{% url 'maps' %}"> {% csrf_token %}
 				<button class = "btn btn-outline-dark"> <strong> Map </strong> </button>
 			</form>
-		</div> -->
+		</div>
+		{% endif %}
 
 
 

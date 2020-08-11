@@ -137,7 +137,7 @@ def createMap(request):
 	lat,lang,users = [], [], []
 	near = CustomUser.objects.filter(city = user.city, user_type = 1)
 	merge = ""
-	if user.user_type == 1:
+	if user.user_type == 0:
 		ans = CustomUser.objects.filter(city = user.city, user_type = 1)
 		for i in ans:
 			temp_address = str(i.locality + ', ' + i.city + ', ' + str(i.pin_code) + ', ' + i.state)
