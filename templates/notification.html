@@ -5,10 +5,21 @@
 {% block title %} {{user.username}} / Messages {% endblock %}
 
 {% block navigation %}
-	<form method = "post" action = "{% url 'homePage' %}">
+<div class = "row">
+	<div class = "col">
+		<form method = "post" action = "{% url 'homePage' %}">
 		{% csrf_token %}
 		<button class="btn btn-outline-dark" style="font-size:22px"><i class="fa fa-home"> Home</i></button>
 	</form>
+</div>
+	<div class = "col">
+				<form method = "get" action = "{% url 'edit_profile' %}">
+					<!-- <strong> Update Profile</strong> -->
+
+					<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Update Profile </strong></button>
+				</form>
+			</div>
+		</div>
 {% endblock %}
 
 {% block content %}

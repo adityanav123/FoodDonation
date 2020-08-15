@@ -5,17 +5,17 @@
 {% block navigation %}
 	<div class = "row">
 		<div class = "col">
-			<form method = "get" action = "{% url 'edit_profile' %}">
-				{% csrf_token %}
-				<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Update Profile </strong></button>
-			</form>
-		</div>
-		<div class = "col">
 	<form method = "post" action = "{% url 'homePage' %}">
 		{% csrf_token %}
 		<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong>Home </strong></button>
 	</form>
 </div>
+<div class = "col">
+			<form method = "get" action = "{% url 'edit_profile' %}">
+				{% csrf_token %}
+				<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Update Profile </strong></button>
+			</form>
+		</div>
 	</div>
 {% endblock %}
 
@@ -34,8 +34,8 @@
 				<tr>
 					<th scope="col"> Person/Organisation </th>
 					<th scope="col"> Location </th>
-					<th scope="col"> Required Resources </th>
-					<th scope ="col"> Request Link </th>
+					<th scope="col"> Required Food for </th>
+					<th scope ="col"> Donate Link </th>
 				</tr>
 			</thead>
 			<tbody>
@@ -46,11 +46,11 @@
 				<tr>
 				<th scope="row"> {{ i.username }}  </th>
 				<th scope="row"> {{ i.locality }}, {{ i.city }} </th>
-				<th scope="row"> {{ i.resources }} </th>
+				<th scope="row"> {{ i.resources }} People </th>
 				<th scope="row"> 
 					<!-- HERE>> PARAMETER PASSED - email id. of the donor, since email is UNIQUE (defined in customUser/models.py), used as primary key to find out the user. -->
 					<form method = "get" action = "{% url 'donation_done' i.email %}"> {% csrf_token %}
-						<button class = "btn btn-outline-primary"> Request </button>
+						<button class = "btn btn-outline-primary"> Donate </button>
 					</form>
 				</th>
 			</tr>
