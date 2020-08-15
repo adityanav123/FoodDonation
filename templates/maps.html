@@ -11,14 +11,14 @@
 
         <!-- Leaflet JS -->
         <!-- Make sure you put this AFTER Leaflet's CSS -->
- <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
    integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
    crossorigin=""></script>
 
 
         <!-- Set map height -->
         <style>
-            #mapid { height: 300px; }
+            #mapid { height: 600px; }
         </style>
     </head>
     <body>
@@ -41,7 +41,7 @@
         <div id="mapid"></div>
         <!-- map js  -->
         <script>
-            var map = L.map('mapid').setView([{{ latitude }}, {{ longitude }}], 17);
+            var map = L.map('mapid').setView([{{ latitude }}, {{ longitude }}], 14);
 
 
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {

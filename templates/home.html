@@ -119,6 +119,17 @@
         
         <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
   </div>
+
+  <!-- CHECKING  FOR LOCATION -->
+  <div class = "alert alert-danger alert-dismissible fade show">
+  		Note : Some locations can't be located because of some maps issues, so map integration is in beta phase. <br> Click here to check if your location can be located or not - 
+  		
+  		<form> {% csrf_token %}
+  		<button class = "btn btn-outline-success" style="font-size:12px" formaction="{% url 'check_location' %}"> Check </button>
+  		</form> 
+
+  	<!-- 	<button type = "button" class = "close" data-dismiss = "alert" aria-hidden = "true"> &times; </button> -->
+  </div>
 <br>
 			
 	{% else %}
