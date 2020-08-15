@@ -179,4 +179,19 @@ def donation_done(request, emailid):
 	you.save()
 	return redirect('showNearbyRecievers')
 
+
+@login_required(login_url = "/users/login")
+def check_location(request):
+	you = request.user
+	admin = CustomUser.objects.get(username = 'admin')
+	location = str(you.locality + ', ' + you.city + ', ' + str(you.pin_code) + ', ' + you.state)
+	coordinates = locator.geocode(location, timeout = 1000)
+	if coordinates == None:
+		message = 'please update your location!'
+	else:
+		message = 'location found on map.'
+	msg = Messages(sender = admin, reciever = you, message = message)
+	msg.save()
+	return redirect('notification')
+
  
