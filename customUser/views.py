@@ -4,6 +4,7 @@ from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser, Messages
+from django.core.mail import send_mail
 
 
 ## TRYING WHATSAPP MESSAGE
@@ -24,7 +25,7 @@ locator = Nominatim(user_agent = "myGeocoder")
 API_KEY = 'pk.eyJ1IjoiYWRpdHlhbmF2IiwiYSI6ImNrZHZwaDB1aTBrOHoycm9ncXM4emI5dGoifQ.oU1UMusmpEUYOS8BMOwo1Q'
 
 
-
+DEFAULT_FROM_EMAIL = 'food.donation841@gmail.com'
 ##
 
 
@@ -72,7 +73,7 @@ def pass_change(request):
 	return render(request, 'password_reset.html')
 
 
-
+@login_required(login_url = "/users/login")
 def show_nearby_donors(request):
 	you = request.user
 	you_address = you.locality + ',' + you.city
@@ -106,6 +107,7 @@ def updateResources(request,emailid): # WHEN A REQUEST IS MADE BY THE RECIEVER, 
 	if req > 0:
 		message = 'Requested resources for ' + str(req) + ' people.'
 		sendRequest = Messages(sender = you, reciever = them, message = message)
+		send_mail(subject = 'Donation Request!',from_email = 'FoodDonation<food.donation841@gmail.com>' ,message = message + '   Check your account!', recipient_list = [them.email], fail_silently = False)
 		sendRequest.save()
 	#SEE ASSUMPTIONS IN README.MD!
 	them.save()
@@ -181,6 +183,8 @@ def donation_done(request, emailid):
 		message = "Donation!! - for " + str(donationOf) + ' people'
 		sendRequest = Messages(sender = you, reciever = them, message = message)
 		sendRequest.save()
+		# SENDING EMAIL ALSO, for notification.
+		send_mail(subject = 'Donation!',from_email = 'FoodDonation<food.donation841@gmail.com>' ,message = message + '    Check your account!', recipient_list = [them.email], fail_silently = False)
 	them.save()
 	you.save()
 	return redirect('showNearbyRecievers')
