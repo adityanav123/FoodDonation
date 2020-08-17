@@ -11,7 +11,7 @@ class CustomUser(AbstractUser):
     """CHOICES=[('0','Donor'),
                    ('1','Reciever')]"""
     state = models.CharField(max_length = 50, default = " ")
-    user_type = models.IntegerField(null = True) # 0 - Donor 1 - Reciever
+    donor = models.BooleanField(default = 'False') # 0 - Donor 1 - Reciever
     email = models.EmailField(unique=True)
     #user_type = models.ChoiceField(choices = CHOICES, widget = models.RadioSelect)
     def __str__(self):

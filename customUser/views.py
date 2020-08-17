@@ -15,9 +15,13 @@ from .models import CustomUser, Messages
 
 
 ## JUST TRYING 
+import geocoder
 from geopy.distance import geodesic
 from geopy.geocoders import Nominatim
 locator = Nominatim(user_agent = "myGeocoder")
+
+
+API_KEY = 'pk.eyJ1IjoiYWRpdHlhbmF2IiwiYSI6ImNrZHZwaDB1aTBrOHoycm9ncXM4emI5dGoifQ.oU1UMusmpEUYOS8BMOwo1Q'
 
 
 
@@ -133,19 +137,21 @@ def readMessage(request, pk):
 def createMap(request):
 	user = request.user
 	address = str(user.locality + ', ' + user.city + ', ' + str(user.pin_code) + ', ' + user.state)
-	coordinates = locator.geocode(address, timeout = 1000)
-	lat,lang,users = [], [], []
-	near = CustomUser.objects.filter(city = user.city, user_type = 1)
+	#coordinates = locator.geocode(address, timeout = 1000)
+	g = geocoder.mapbox(address, key=API_KEY)
+	lati,lang,users = [], [], []
+	near = CustomUser.objects.filter(city = user.city, donor = False)
 	merge = ""
-	if user.user_type == 0:
-		ans = CustomUser.objects.filter(city = user.city, user_type = 1)
+	if user.donor == True:
+		ans = CustomUser.objects.filter(city = user.city, donor = False)
 		for i in ans:
 			temp_address = str(i.locality + ', ' + i.city + ', ' + str(i.pin_code) + ', ' + i.state)
-			coord = locator.geocode(temp_address, timeout = 1000)
-			lat.append(coord.latitude)
-			lang.append(coord.longitude)
+			#coord = locator.geocode(temp_address, timeout = 1000)
+			g1 = geocoder.mapbox(location, key=API_KEY)
+			lati.append(g1.lat)
+			lang.append(g1.lng)
 			users.append(i.username)
-	return render(request, 'maps.html', {'longitude' : coordinates.longitude, 'latitude' : coordinates.latitude,  'lat': lat, 'lang': lang, 'users': users, 'near' : near})
+	return render(request, 'maps.html', {'longitude' : g.lng, 'latitude' : g.lat,  'lat': lati, 'lang': lang, 'users': users, 'near' : near})
 
 
 
@@ -185,8 +191,10 @@ def check_location(request):
 	you = request.user
 	admin = CustomUser.objects.get(username = 'admin')
 	location = str(you.locality + ', ' + you.city + ', ' + str(you.pin_code) + ', ' + you.state)
-	coordinates = locator.geocode(location, timeout = 1000)
-	if coordinates == None:
+	#coordinates = locator.geocode(location, timeout = 1000)
+	g = geocoder.mapbox(location, key=API_KEY)
+
+	if g.lat == None:
 		message = 'please update your location!'
 	else:
 		message = 'location found on map.'

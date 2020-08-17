@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %} error!! | Food Donation {% endblock %}
+
+{% block navigation %}
+	<div class = "row">
+		<div class = "col">
+			<form method="post" action="{% url 'edit_profile' %}">
+				<button class = "btn btn-outline-dark"> Update </button>
+			</form>
+		</div>
+		<div class = "col">
+			<form method="post" action="{% url 'homePage' %}">
+		<button class = "btn btn-outline-dark" type = "submit"> Home </button>
+	</form>
+	
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block content %}
+	<h3> <kbd> Something is wrong! </kbd> </h3> <hr>
+
+
+	
+{% endblock %}
