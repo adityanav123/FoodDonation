@@ -149,7 +149,7 @@ def createMap(request):
 		for i in ans:
 			temp_address = str(i.locality + ', ' + i.city + ', ' + str(i.pin_code) + ', ' + i.state)
 			#coord = locator.geocode(temp_address, timeout = 1000)
-			g1 = geocoder.mapbox(location, key=API_KEY)
+			g1 = geocoder.mapbox(temp_address, key=API_KEY)
 			lati.append(g1.lat)
 			lang.append(g1.lng)
 			users.append(i.username)
