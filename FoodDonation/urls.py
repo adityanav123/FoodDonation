@@ -23,7 +23,8 @@ from customUser import views as user_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', TemplateView.as_view(template_name = 'home.html'), name = 'home'),
+    #path('', TemplateView.as_view(template_name = 'home.html'), name = 'home'),
+    path('', user_view.login_view, name = 'home'),
     path('loginView/',user_view.login_view, name = 'login_view'),
     path('logout/',user_view.logout_request, name = 'logout_view'),
     path('users/', include('customUser.urls')),
