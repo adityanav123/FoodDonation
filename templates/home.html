@@ -77,8 +77,12 @@
 			{% csrf_token %}
 			<button class = "btn btn-outline-dark navbar-btn" type = "submit"><strong>  Login </strong> </button>
 			<button class = "btn btn-outline-dark navbar-btn" type = "submit" formaction="{% url 'signup' %}"><strong> Sign Up</strong> </button>
+		 </form>
+		<!-- <form method="post" action="{% url 'signup' %}">
+			{% csrf_token %}
+			<button class = "btn btn-outline-dark navbar-btn" type = "submit" ><strong> Sign Up</strong> </button>
 		</form>
-
+ -->
 
 				
 		{% endif %}
