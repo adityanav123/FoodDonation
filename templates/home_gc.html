@@ -53,7 +53,8 @@
               UN and PWD CHANGE REQUIRed
            -->
 
-            <form class="form-inline" >
+            <form class="form-inline" method="post" action = "{% url 'login_view' %}"> {% csrf_token %}
+              {{ form }}
               <input class="form-control mr-sm-2" type="text" placeholder="username" aria-label="username">
               <input class="form-control mr-sm-2" type="password" placeholder="password" aria-label="password">
               <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Login</button>
