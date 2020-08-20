@@ -1,0 +1,30 @@
+
+<!-- https://pythonprogramming.net/user-login-logout-django-tutorial/ -->
+
+{% extends 'base.html' %}
+
+{% block title %} home | testing {% endblock %}
+
+
+
+{% block navigation %}
+
+<!-- Login  -->
+
+{% if user.is_authenticated %}
+	<h4> <kbd> hello {{ user.username  }} </kbd> </h4>
+	<form method="post" action = "{% url 'logout_view' %}"> {% csrf_token %}
+	<!-- {{ form }} -->
+	<button class = "btn btn-outline-dark" type="submit"> logout</button>
+</form>
+
+{% else %}
+<form method="post" action = "{% url 'login_view' %}"> {% csrf_token %}
+	{{ form }}
+	<button class = "btn btn-outline-dark" type="submit"> submit</button>
+</form>
+{% endif %}
+
+{% endblock %}
+
+
