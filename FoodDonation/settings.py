@@ -139,9 +139,9 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 ## BELOW LOGIC IS FOR EMAIL SENDING - no change here.
 
-EMAIL_HOST_PASSWORD = 'sjfxkkngwynxsywl'
+EMAIL_HOST_PASSWORD = 'mmlnismvozzggrif'
 
-DEFAULT_FROM_EMAIL = 'Aditya <food_donation@appleid.in>'
+DEFAULT_FROM_EMAIL = 'Team Food Donation <food.donation841@gmail.com>'
 SMTP_ENABLED = True
 
 
@@ -154,4 +154,5 @@ EMAIL_PORT = 587
 
 EMAIL_USE_TLS = True
 
-EMAIL_HOST_USER = "adityanavphule122@gmail.com"
+EMAIL_HOST_USER = "food.donation841@gmail.com"
+

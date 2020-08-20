@@ -20,13 +20,15 @@ from geopy.geocoders import Nominatim
 locator = Nominatim(user_agent = "myGeocoder")
 
 place1 = str(input("enter location 1 - "))
-place2 = str(input("enter location 2 - "))
+# place2 = str(input("enter location 2 - "))
 
 location1 = locator.geocode(place1)
-location2 = locator.geocode(place2)
+# location2 = locator.geocode(place2)
 i1 = (location1.latitude, location1.longitude)
-i2 = (location2.latitude, location2.longitude)
-print(location1.latitude, ' and ', location1.longitude)
+# i2 = (location2.latitude, location2.longitude)
+
+print('coordinates - ', location1.latitude, ' and ', location1.longitude)
+print('address - ', location1.address)
 
 print("distance between them(int km) :- ", int(geodesic(i1, i2).km))
 #print(location.longitude, ' - ', location.latitude)

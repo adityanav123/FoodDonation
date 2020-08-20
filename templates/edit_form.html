@@ -28,10 +28,10 @@
 <!-- INSERTING CONTENT IN THE ' CONTENT ' BLOCK IN BASE.html -->
 
 <h2> <kbd> Update Profile </kbd> </h2> <br> 
-<div class="alert alert-success alert-dismissible fade show">
+<!-- <div class="alert alert-success alert-dismissible fade show">
    	User Type: <strong> 0 </strong>- Donor  <strong> 1 </strong>- Reciever
    	<button type = "button" class = "close" data-dismiss = "alert" aria-hidden="true">&times;</button>
-  </div>
+  </div> -->
 <div class = "container">
 <form method = "post">
 	{%csrf_token%}
@@ -44,13 +44,13 @@
 		<div class = "col">
 			{{ form.email | as_crispy_field }}
 		</div>
+		<div class = "col-2">
+			{{form.donor | as_crispy_field}}
+		</div>
 	</div>
 
 	<!-- SECOND ROW  -->
 	<div class = "row">
-		<div class = "col-2">
-			{{form.user_type | as_crispy_field}}
-		</div>
 		<div class = "col-3">
 			{{form.resources | as_crispy_field}}
 		</div>

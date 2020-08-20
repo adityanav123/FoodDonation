@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% block title %} Nearby Recievers {% endblock %}
+{% block title %} {{ user.username }} | Nearby Recievers {% endblock %}
 
 
 {% block navigation %}
@@ -40,7 +40,7 @@
 			</thead>
 			<tbody>
 	{% for i in donors %}
-		{% if i.username != 'admin' and i.user_type == 1 and i.resources > 0%}
+		{% if i.username != 'admin' and i.donor == False and i.resources > 0 %}
 		<!-- CREATING TABLE  -->
 
 				<tr>

@@ -4,9 +4,9 @@
 {% block title %} 
 
 {% if user.is_authenticated %}
-{{ user.username }} / Home 
+{{ user.username }} | Home 
 {% else %}
- Food Donation / Home 
+ Food Donation | Home 
  {% endif %}
 
 {% endblock %}
@@ -33,7 +33,7 @@
 				<!-- <button class = 'btn btn-success'><i class="material-icons" style="font-size:30px;color:darkgreen">event_busy</i></button> -->
 			</form>
 		</div>
-		{% if user.user_type == 0 %}
+		{% if user.donor == True %}
 		<div class = "col">
 			<form method = "post" action = "{% url 'maps' %}"> {% csrf_token %}
 				<button class = "btn btn-outline-dark"> <strong> Map </strong> </button>
@@ -51,7 +51,7 @@
 				</form>
 			</div>
 
-			{% if user.user_type == 1 %}
+			{% if user.donor == False %}
 			<div class = "col">
 				<form method = "post" action = "{% url 'showNearbyDonors' %}"> {%csrf_token%}
 					<button type = "submit" class = "btn btn-outline-dark navbar-btn"><strong> Request </strong> </button>
@@ -96,7 +96,7 @@
 			Hello <kbd> {{ user.username }}</kbd>
 		 <br> Your given information - <br> <hr>
 		 <!-- <div class = "container-fluid" style="border:1px solid #36160F;"> -->
-		 	{% if user.user_type == 0 %}
+		 	{% if user.donor == True %}
 				You are a "Donor"<br>
 				Food Packets available for - <strong> {{ user.resources }} </strong> People.<br>
 			{% else %}
