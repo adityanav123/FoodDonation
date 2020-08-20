@@ -11,7 +11,7 @@
     <!-- <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"> -->
     <title> 
 		{% block title %}
-			Food Donation<!-- IF ANY PAGE DOESN'T GIVE ANY TITLE IN THE BLOCK THIS DEFAULT TITLE WILL BE USED -->
+			Food Donation | Home
 		{% endblock %} 
 	</title>
  <!--  <script src='https://api.mapbox.com/mapbox-gl-js/v1.11.0/mapbox-gl.js'></script>
@@ -53,7 +53,8 @@
               UN and PWD CHANGE REQUIRed
            -->
 
-            <form method = "post" action = "{% url 'login_view' %}"> {% csrf_token %}
+
+            <form class="form-inline" method="post" action = "{% url 'login_view' %}"> {% csrf_token %}
               {{ form }}
               <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Login</button>
             </form>
