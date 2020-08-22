@@ -25,3 +25,11 @@ class Messages(models.Model):
     read_unread = models.BooleanField(default = "False") # FALSE - UNREAD
     def __str__(self):
         return self.message
+
+
+class Locations(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete = models.CASCADE, related_name = "user")
+    latitude = models.FloatField(null = True)
+    longitude = models.FloatField(null = True)
+    def __str__(self):
+        return str(str(latitude), ' - ', str(longitude))
