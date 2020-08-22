@@ -28,8 +28,8 @@ class Messages(models.Model):
 
 
 class Locations(models.Model):
-    user = models.ForeignKey(CustomUser, on_delete = models.CASCADE, related_name = "user")
+    user_id  = models.ForeignKey(CustomUser, on_delete = models.CASCADE, related_name = "user_id")
     latitude = models.FloatField(null = True)
     longitude = models.FloatField(null = True)
     def __str__(self):
-        return str(str(latitude), ' - ', str(longitude))
+        return self.user_id.username
