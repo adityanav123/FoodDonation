@@ -16,66 +16,66 @@
 {% block content %}
 <h2> <kbd> Sign Up </kbd> </h2>
 <div class = "container-fluid" style="border:1px solid #36160F;">
-<!-- <p> <strong> <u>  ** user_type field has two options only -> 0 for Donor and 1 for receiver <br> 
-	** can login as an organisation, fill accordingly. </u></strong>
- </p> -->
-<form method = "post">
-	{% csrf_token %}
-	<!-- FIRST ROW -->
-	<div class = "row">
-		<div class = "col-4"> <!-- col-value - shows how many column space the input string(here, username) is taking -->
-			{{ form.username | as_crispy_field }}
+	<!-- <p> <strong> <u>  ** user_type field has two options only -> 0 for Donor and 1 for receiver <br> 
+		** can login as an organisation, fill accordingly. </u></strong>
+	</p> -->
+	<form method = "post">
+		{% csrf_token %}
+		<!-- FIRST ROW -->
+		<div class = "row">
+			<div class = "col-4"> <!-- col-value - shows how many column space the input string(here, username) is taking -->
+				{{ form.username | as_crispy_field }}
+			</div>
+			<div class = "col-4">
+				{{ form.email | as_crispy_field }}
+			</div>
+			<div class = "col-2">
+				{{form.organisation | as_crispy_field}}
+			</div>
+			<div class = "col-1">
+				{{form.donor | as_crispy_field}}
+			</div>
 		</div>
-		<div class = "col">
-			{{ form.email | as_crispy_field }}
-		</div>
-	</div>
 
-	<!-- SECOND ROW  -->
-	<div class = "row">
-		<div class = "col-1">
-			{{form.donor | as_crispy_field}}
+		<!-- SECOND ROW  -->
+		<div class = "row">
+			<div class = "col-3">
+				{{form.resources | as_crispy_field}}
+			</div>
+			<div class = "col">
+				{{form.locality | as_crispy_field}}
+			</div>
+			<div class = "col">
+				{{form.city | as_crispy_field}}
+			</div>
+			<div class = "col-3">
+				{{ form.state | as_crispy_field}}
+			</div>
 		</div>
-		<div class = "col-3">
-			{{form.resources | as_crispy_field}}
-		</div>
-		<div class = "col">
-			{{form.locality | as_crispy_field}}
-		</div>
-		<div class = "col">
-			{{form.city | as_crispy_field}}
-		</div>
-		<div class = "col-3">
-			{{ form.state | as_crispy_field}}
-		</div>
-	</div>
 
-	<!-- THIRD ROW  -->
-	<div class = "row">
-		<div class = "col-2">
-			{{form.pin_code | as_crispy_field}}
+		<!-- THIRD ROW  -->
+		<div class = "row">
+			<div class = "col-2">
+				{{form.pin_code | as_crispy_field}}
+			</div>
+			<div class = "col-3">
+				{{form.contact_no | as_crispy_field}}
+			</div>
 		</div>
-		<div class = "col-3">
-			{{form.contact_no | as_crispy_field}}
+		<!-- FOURTH ROW -->
+		<div class = "row">
+			<div class = "col">
+				{{form.password1 | as_crispy_field}}
+			</div>
+			<div class = "col">
+				{{form.password2 | as_crispy_field}}
+			</div>
 		</div>
-	</div>
-	<!-- FOURTH ROW -->
-	<div class = "row">
-		<div class = "col">
-			{{form.password1 | as_crispy_field}}
-		</div>
-		<div class = "col">
-			{{form.password2 | as_crispy_field}}
-		</div>
-	</div>
-	<button type = "submit" class = "btn btn-success"> Sign Up </button>
-	<!-- <button type = "submit" class = "btn btn-small" formaction = "{% url 'login' %}"> Login? </button> -->
-</form>
+		<button type = "submit" class = "btn btn-success"> Sign Up </button>
+	</form>
 
-<form method = "post" action = "{% url 'login' %}"> 
-	{% csrf_token %}	
-	<h6>Already Have an account?</h6><button type = "submit" class = "btn btn-outline-dark btn-sm">Login </button>
-</form>
+		<h6>Already Have an account?</h6>
+		<a href="{% url 'login' %}" class="btn btn-info">Login</a>
 
 </div>
 {% endblock %}
