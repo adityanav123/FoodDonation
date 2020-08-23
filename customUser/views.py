@@ -206,7 +206,7 @@ def check_location(request):
 	if g.lat == None:
 		message = 'please update your location!'
 	else:
-		calculate_coordinates(you.email, location)
+		calculate_coordinates(you, location)
 		message = 'location found on map.'
 	msg = Messages(sender = admin, reciever = you, message = message)
 	msg.save()
@@ -258,14 +258,12 @@ def logout_request(request):
     messages.info(request, "Logged out successfully!")
     return redirect("login_view")
 
-def calculate_coordinates(user_id, address): # TO STORE THE ADDRESS IN THE DATABASE.
+def calculate_coordinates(user, address): # TO STORE THE ADDRESS IN THE DATABASE.
 	g = geocoder.mapbox(address, key = API_KEY)
-	you = CustomUser.objects.get(email = user_id)
-	#if_present = Locations.objects.get(user_id = you)
 	try:
-		if_present = Locations.objects.get(user_id = you)	
+		if_present = Locations.objects.get(user_id = user)	
 	except Locations.DoesNotExist:
-		add_location = Locations(user_id = you, latitude = g.lat, longitude = g.lng)
+		add_location = Locations(user_id = user, latitude = g.lat, longitude = g.lng)
 		add_location.save()
 		return
 	if_present.latitude = g.lat
