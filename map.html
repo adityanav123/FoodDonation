@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <meta charset='utf-8' />
+    <title>Map Try | Aditya</title>
+    <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+    <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #map {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id='map'></div>
+    <script>
+    mapboxgl.accessToken = 'pk.eyJ1IjoiYWRpdHlhbmF2cGh1bGUiLCJhIjoiY2tjOHB4c2h4MDUxNTJybGtldDdmMHZscyJ9.EPRqCAsAVwUFTncfyoCr9w';
+    var map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/adityanavphule/cke6v65cw3hbo1aox9x6ic6zw', 
+      center: [-87.661557, 41.893748],
+      zoom: 10.7
+    });
+    // code from the next step will go here
+
+    var marker = new mapboxgl.Marker().setLngLat([-87.661557, 41.893748]).addTo(map);
+    </script>
+  </body>
+</html>
