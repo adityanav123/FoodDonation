@@ -3,7 +3,7 @@ from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser, Messages
+from .models import CustomUser, Messages, Locations
 from django.core.mail import send_mail
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
@@ -206,6 +206,7 @@ def check_location(request):
 	if g.lat == None:
 		message = 'please update your location!'
 	else:
+		calculate_coordinates(you, location)
 		message = 'location found on map.'
 	msg = Messages(sender = admin, reciever = you, message = message)
 	msg.save()
@@ -258,5 +259,20 @@ def logout_request(request):
     logout(request)
     messages.info(request, "Logged out successfully!")
     return redirect("login_view")
+
+def calculate_coordinates(user, address): # TO STORE THE ADDRESS IN THE DATABASE.
+	g = geocoder.mapbox(address, key = API_KEY)
+	try:
+		if_present = Locations.objects.get(user_id = user)	
+	except Locations.DoesNotExist:
+		add_location = Locations(user_id = user, latitude = g.lat, longitude = g.lng)
+		add_location.save()
+		return
+	if_present.latitude = g.lat
+	if_present.longitude = g.lng
+	if_present.save()
+
+		
+
 
  

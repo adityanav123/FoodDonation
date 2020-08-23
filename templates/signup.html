@@ -74,8 +74,12 @@
 		<button type = "submit" class = "btn btn-success"> Sign Up </button>
 	</form>
 
-		<h6>Already Have an account?</h6>
-		<a href="{% url 'login' %}" class="btn btn-info">Login</a>
+<!-- <form method = "post" action = "{% url 'login' %}"> 
+	{% csrf_token %}	
+	<h6>Already Have an account?</h6><button type = "submit" class = "btn btn-outline-dark btn-sm">Login </button>
+</form> -->
+<a href="{% url 'login' %}" class="btn btn-outline-dark"> <small> Login </small></a>
 
 </div>
 {% endblock %}
+

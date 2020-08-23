@@ -15,6 +15,7 @@
 - Using icons in buttons - https://mdbootstrap.com/docs/jquery/content/icons-list/
 
 
+- Crowd Sourcing :  The act of taking a job traditionally performed by a designated agent (employee) and giving it to generally to a large group of people in the form of an open call. 
 
 
 
@@ -22,6 +23,8 @@
 #ISSUES/ASSUMPTIONS - 
 1. Now, the donor doesnot have the option to cancel deliveries, yet.
 2. All the requests that are made are to be fulfilled.
+
+
 
 
 
