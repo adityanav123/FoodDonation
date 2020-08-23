@@ -261,7 +261,18 @@ def logout_request(request):
 def calculate_coordinates(user_id, address): # TO STORE THE ADDRESS IN THE DATABASE.
 	g = geocoder.mapbox(address, key = API_KEY)
 	you = CustomUser.objects.get(email = user_id)
-	add_location = Locations(user_id = you, latitude = g.lat, longitude = g.lng)
-	add_location.save()
+	#if_present = Locations.objects.get(user_id = you)
+	try:
+		if_present = Locations.objects.get(user_id = you)	
+	except Locations.DoesNotExist:
+		add_location = Locations(user_id = you, latitude = g.lat, longitude = g.lng)
+		add_location.save()
+		return
+	if_present.latitude = g.lat
+	if_present.longitude = g.lng
+	if_present.save()
+
+		
+
 
  

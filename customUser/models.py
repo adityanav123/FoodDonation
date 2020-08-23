@@ -14,6 +14,7 @@ class CustomUser(AbstractUser):
     donor = models.BooleanField(default = 'False') # 0 - Donor 1 - Reciever
     email = models.EmailField(unique=True)
     #user_type = models.ChoiceField(choices = CHOICES, widget = models.RadioSelect)
+    organisation = models.BooleanField(default = 'False')
     def __str__(self):
         return self.username
 
