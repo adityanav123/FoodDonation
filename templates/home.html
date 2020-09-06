@@ -15,12 +15,12 @@
 	<div class = "row">
 	{% if user.is_authenticated %}
 
-		<div class = "col nav-item active"> 
+		<div class = "nav-item active"> 
 			<a class="nav-link" href="{% url 'notification' %}" >Notification</a>
 		</div>
 
 		{% if user.donor == True %}
-		<div class = "col nav-item active">
+		<div class = "nav-item active">
 			<a href="{% url 'maps' %}" class="nav-link">Maps</a>
 		</div>
 		{% endif %}
@@ -31,16 +31,16 @@
 			</div>
 
 			{% if user.donor == False %}
-				<div class = "col nav-item active">
+				<div class = "nav-item active">
 					<a href="{% url 'showNearbyDonors' %}" class="nav-link">Request</a>
 				</div>
 			{% else %}
-				<div class = "col nav-item active">
+				<div class = "nav-item active">
 			  	<a href="{% url 'showNearbyRecievers' %}" class="nav-link">Donate</a>
 				</div>
 			{% endif %}
 
-			<div class = "col nav-item active">
+			<div class = "nav-item active">
 				<a href="{% url 'logout' %}" class="nav-link">Logout</a>
 			</div>
 	{% else %}
