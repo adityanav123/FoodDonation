@@ -15,41 +15,40 @@
 	<div class = "row">
 	{% if user.is_authenticated %}
 
-		<div class = "col"> 
-			<a href="{% url 'notification' %}" class="btn btn-outline-dark"><strong>Notification</strong></a>
+		<div class = "col nav-item active"> 
+			<a class="nav-link" href="{% url 'notification' %}" >Notification</a>
 		</div>
 
 		{% if user.donor == True %}
-		<div class = "col">
-			<a href="{% url 'maps' %}" class="btn btn-outline-dark"><strong>Maps</strong></a>
+		<div class = "col nav-item active">
+			<a href="{% url 'maps' %}" class="nav-link">Maps</a>
 		</div>
 		{% endif %}
 
-			<div class = "col">
-				<form method = "get" action = "{% url 'edit_profile' %}">
-					<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Update Profile </strong></button>
-				</form>
+			<div class = "nav-item active">
+					<a href="{% url 'edit_profile' %}" class="nav-link"> Update Profile </a>
+				
 			</div>
 
 			{% if user.donor == False %}
-				<div class = "col">
-					<a href="{% url 'showNearbyDonors' %}" class="btn btn-outline-dark"><strong>Request</strong></a>
+				<div class = "col nav-item active">
+					<a href="{% url 'showNearbyDonors' %}" class="nav-link">Request</a>
 				</div>
 			{% else %}
-				<div class = "col">
-			  	<a href="{% url 'showNearbyRecievers' %}" class="btn btn-outline-dark"><strong>Donate</strong></a>
+				<div class = "col nav-item active">
+			  	<a href="{% url 'showNearbyRecievers' %}" class="nav-link">Donate</a>
 				</div>
 			{% endif %}
 
-			<div class = "col">
-				<a href="{% url 'logout' %}" class="btn btn-outline-dark"><strong>Logout</strong></a>
+			<div class = "col nav-item active">
+				<a href="{% url 'logout' %}" class="nav-link">Logout</a>
 			</div>
 	{% else %}
-		<div class = "col - 1">
-		 <a href="{% url 'login' %}" class="btn btn-outline-dark"><strong>Login</strong></a>
+		<div class = "nav-item active">
+		 <a href="{% url 'login' %}" class="nav-link"><strong>Login</strong></a>
 		</div>
-		<div class = "col - 1">
-		 <a href="{% url 'signup' %}" class="btn btn-outline-dark"><strong>Sign Up</strong></a>	
+		<div class = "nav-item active">
+		 <a href="{% url 'signup' %}" class="nav-link"><strong>Sign Up</strong></a>	
 		 </div>		
 	{% endif %}
 
