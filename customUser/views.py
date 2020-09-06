@@ -157,7 +157,7 @@ def createMap(request):
 			g1 = geocoder.mapbox(temp_address, key=API_KEY)
 			lati.append(g1.lat)
 			lang.append(g1.lng)
-			users.append(i.username)
+			users.append(i)
 	return render(request, 'maps.html', {'longitude' : g.lng, 'latitude' : g.lat,  'lat': lati, 'lang': lang, 'users': users, 'near' : near})
 
 
