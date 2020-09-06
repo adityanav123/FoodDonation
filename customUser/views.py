@@ -245,13 +245,15 @@ def login_view(request):
 			if user is not None:
 				login(request, user)
 				messages.info(request, f'You are now logged in as {username}')
-				return redirect('login_view')
+
+				return redirect('homePage')
 			else:
 				messages.error(request, 'invalid username/password!')
 		else:
 			messages.error(request, 'invalid username/password!')
 	form = AuthenticationForm()
-	return render(request, 'test.html', {'form' : form}) 
+	return render(request, 'home_gc.html', {'form' : form}) 
+
 
 def logout_request(request):
     logout(request)
