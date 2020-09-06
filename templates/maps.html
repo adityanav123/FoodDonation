@@ -1,8 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="utf-8" />
-<title>Locate the user</title>
+{% extends 'base.html' %}
+
+
+{% block title %}<title>Locate the user</title>{% endblock %}
+{% block head %}
     <script src="https://d3js.org/d3.v3.min.js"></script>
     <script src="https://d3js.org/topojson.v0.min.js"></script>
     <link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.css" />
@@ -11,20 +11,38 @@
     #mapid {
     left:0;
     top:0;
-    height:100%;
-    width:100%;
+    height:50%;
+    width:70%;
     position:absolute;
+
 }
     .map-responsive{
     overflow:hidden;
-    padding-bottom:56.25%;
+    padding-bottom:76.25%;
     position:relative;
     height:0;
 
     }
 </style>
-</head>
-<body>
+{% endblock %}
+{% block navigation %}
+	<div class = "row">
+		<div class = "col">
+	<form method = "post" action = "{% url 'homePage' %}">
+		{% csrf_token %}
+		<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong>Home </strong></button>
+	</form>
+</div>
+<div class = "col">
+			<form method = "get" action = "{% url 'edit_profile' %}">
+				{% csrf_token %}
+				<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Update Profile </strong></button>
+			</form>
+		</div>
+	</div>
+{% endblock %}
+
+{% block content %}
  <h1>Nearby Receiver</h1>
         {% if users %}
         <ul>
@@ -35,12 +53,12 @@
         {% endfor %}
         </ul>
         {% endif %}
- <div class="map-responsive">
+ <div class="map-responsive container-fluid">
  <div id="mapid"></div>
  </div>
 
 <script>
-   navigator.geolocation.getCurrentPosition(function(location) {
+	navigator.geolocation.getCurrentPosition(function(location) {
   var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
 
   var mymap = L.map('mapid').setView(latlng, 7)
@@ -77,5 +95,4 @@
 });
 </script>
 
-</body>
-</html>
+{% endblock %}
