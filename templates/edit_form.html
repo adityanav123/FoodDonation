@@ -1,41 +1,23 @@
-<!-- THIS IS THE FORM FOR EDIT PROFILE -->
-{% extends 'base.html' %} <!-- : here , extending the base.html file, all the things in the base.html will be copied here -->
+{% extends 'base.html' %} 
 
-{% load crispy_forms_tags %} <!-- JUST FOR STYLING THE FORMS, USED IN BOOTSTRAP -->
+{% load crispy_forms_tags %} 
 
-{% block title %} Update Profile | {{ user.username }} {% endblock %} <!-- SETTING THE PAGE TITLE  -->
-
+{% block title %} Update Profile | {{ user.username }} {% endblock %} 
 
 
 <!-- INSERTING LINKS IN THE NAVIGATION BAR -->
 {% block navigation %}
-
-<form method = "post" action = "{% url 'homePage' %}">
-    {% csrf_token %}
-    <button class="btn btn-outline-dark" style="font-size:22px"><i class="fa fa-home"> Home</i></button>
-  </form>
-
+  <a href="{% url 'homePage' %}" class="btn btn-outline-dark"><strong>Home</strong></a>
   <div class = "col-3">
-				<form method = "post" action = "{% url 'logout' %}">
-					{% csrf_token %}
-					<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Logout</strong></button>
-				</form>
-			</div>
-
+		<a href="{% url 'logout' %}" class="btn btn-outline-dark"><strong>Logout</strong></a>
+  </div>
 {% endblock %}
 
 {% block content %}
-<!-- INSERTING CONTENT IN THE ' CONTENT ' BLOCK IN BASE.html -->
-
 <h2> <kbd> Update Profile </kbd> </h2> <br> 
-<!-- <div class="alert alert-success alert-dismissible fade show">
-   	User Type: <strong> 0 </strong>- Donor  <strong> 1 </strong>- Reciever
-   	<button type = "button" class = "close" data-dismiss = "alert" aria-hidden="true">&times;</button>
-  </div> -->
 <div class = "container">
 <form method = "post">
 	{%csrf_token%}
-	<!-- {{ form | crispy }} -->
 	<!-- FIRST ROW  -->
 	<div class = "row">
 		<div class = "col-4">
@@ -82,12 +64,5 @@
 	<button type = "submit" class = "btn btn-outline-success"> Update </button>
 </form>
 </div>
-
-<form method = "post" action = "{% url 'password_reset' %}">
-	{% csrf_token %}
-	<button type = "submit" class = "btn btn-outline-success"> Change Password </button>
-</form>
-
-
-
+<a href="{% url 'password_reset' %}" class="btn btn-outline-danger"><strong>Change Password</strong></a>
 {% endblock %}

@@ -1,17 +1,12 @@
-<!-- IGNORE THIS FILE.. NOT USED ANYMORE!!!!!!! -->
-
 {% extends 'base.html' %}
-{% load static %} <!-- loads css content, if available, but we have not used it here, only bootstrap used. -->
+{% load static %} 
 {% block title %} Password Update {% endblock %}
 
 {% block content %}
 
 <h3> <kbd> Password Change form </kbd></h3>
 <p> under construction .. </p>
-<form method = "post" action = "{% url 'logout' %}">
-	{% csrf_token %}
-	<button type = "submit" class = "btn btn-outline-danger"> Logout </button>
-</form>
+<a href="{% url 'logout' %}" class="btn btn-outline-dark" method = "post"><strong>Logout</strong></a>
 
 <form method = "post" action = "{% url 'homePage' %}">
 		{% csrf_token %}

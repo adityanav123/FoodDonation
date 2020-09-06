@@ -1,33 +1,18 @@
 {% extends 'base.html' %}
 {% block title %} {{ user.username }} | Nearby Recievers {% endblock %}
-
-
 {% block navigation %}
-	<div class = "row">
-		<div class = "col">
-	<form method = "post" action = "{% url 'homePage' %}">
-		{% csrf_token %}
-		<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong>Home </strong></button>
-	</form>
-</div>
-<div class = "col">
-			<form method = "get" action = "{% url 'edit_profile' %}">
-				{% csrf_token %}
-				<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Update Profile </strong></button>
-			</form>
-		</div>
+	<div class = "col-1">
+		<a href="{% url 'homePage' %}" class="btn btn-outline-dark"  method = "post"><strong>Home</strong></a>
+	</div>
+	<div class = "col-1">
+		<a href="{% url 'edit_profile' %}" class="btn btn-outline-dark"><strong>Update</strong></a>
 	</div>
 {% endblock %}
 
 {% block content %}
-
-	<!-- SOME OBJECTS ARE SENT AS A PARAMETER - SEE customUser/views.py -->
-
 	<h5> Your location is - <kbd> {{ you.locality }}, {{ you.city }} </kbd> </h5> <br>
 	<h6> <strong> You have resources for - <kbd> {{ you.resources }}</kbd> people.</strong></h6>
 
-
-	<!-- <p> Donors in  <strong> {{ you.city }}</strong> with your available requirements -  </p> -->
 	<p> People/Organisations who need Food in <strong> {{ you.city }} </strong> </p>
 	<table class = "table">
 			<thead>
@@ -41,49 +26,18 @@
 			<tbody>
 	{% for i in donors %}
 		{% if i.username != 'admin' and i.donor == False and i.resources > 0 %}
-		<!-- CREATING TABLE  -->
-
 				<tr>
 				<th scope="row"> {{ i.username }}  </th>
 				<th scope="row"> {{ i.locality }}, {{ i.city }} </th>
 				<th scope="row"> {{ i.resources }} People </th>
 				<th scope="row"> 
-					<!-- HERE>> PARAMETER PASSED - email id. of the donor, since email is UNIQUE (defined in customUser/models.py), used as primary key to find out the user. -->
-					<form method = "get" action = "{% url 'donation_done' i.email %}"> {% csrf_token %}
-						<button class = "btn btn-outline-primary"> Donate </button>
-					</form>
+					<a href="{% url 'donation_done' i.email %}" class="btn btn-outline-dark"  method = "post"><strong>Donate</strong></a>
 				</th>
 			</tr>
-			
-
-
-		<!-- <li> {{ i.username }} [available - {{i.resources}}]</li> -->
 		{% endif %}
 	
 	{% endfor %}
 	</tbody>
 			</table>
 	<br> <br> 
-
-	<!--  MAPS TRY!!! 
-	<div id='map' style='width: 400px; height: 300px;'></div>
-	<script>
-		mapboxgl.accessToken = 'pk.eyJ1IjoiYWRpdHlhbmF2cGh1bGUiLCJhIjoiY2tjOHB4c2h4MDUxNTJybGtldDdmMHZscyJ9.EPRqCAsAVwUFTncfyoCr9w';
-		var map = new mapboxgl.Map({
-							container: 'map',
-							style: 'mapbox://styles/mapbox/streets-v11',
-							"center": [24.9345886, 75.5883278],
-							"cursor_style": 'pointer',
-            "marker_color": "red",
-            "rotate": False,
-            "geocoder": True,
-            "fullscreen_button": True,
-            "navigation_buttons": True,
-            "track_location_button": True,
-            "readonly": True,
-            "placeholder": "Pick a location on map below",
-						});
-	</script> -->
 {% endblock %}
-
-<!-- MAPS TRY!!! -->

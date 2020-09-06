@@ -4,88 +4,54 @@
 {% block title %} 
 
 {% if user.is_authenticated %}
-{{ user.username }} | Home 
+		{{ user.username }} | Home 
 {% else %}
- Food Donation | Home 
+ 		Food Donation | Home 
  {% endif %}
 
 {% endblock %}
 
-
-
 {% block navigation %}
 	<div class = "row">
 	{% if user.is_authenticated %}
-	<!-- whichever user is currently logged in, it will be transerferred to any link the user clicks, i.e. if the user clicks home.html, user object will automatically be transferred to the page. -->
-			
-		
-		<div class = "col">
-			<form method="post" action = "{% url 'notification' %}">
-				{%csrf_token %}
 
-				<!-- IF ANY NEW REQUESTS -  -->
-				<button class="btn btn-outline-dark" style="font-size:22px"><i class="fa fa-wpforms"> <strong> Messages </strong>
-					<!-- {% if user.is_authenticated %}
-					<span class="badge">{{message}}
-						{% endif %} -->
-					</span></i></button>
-				<!-- IF NO NEW REQUESTS - -->
-				<!-- <button class = 'btn btn-success'><i class="material-icons" style="font-size:30px;color:darkgreen">event_busy</i></button> -->
-			</form>
+		<div class = "col"> 
+			<a href="{% url 'notification' %}" class="btn btn-outline-dark"><strong>Notification</strong></a>
 		</div>
+
 		{% if user.donor == True %}
 		<div class = "col">
-			<form method = "post" action = "{% url 'maps' %}"> {% csrf_token %}
-				<button class = "btn btn-outline-dark"> <strong> Map </strong> </button>
-			</form>
+			<a href="{% url 'maps' %}" class="btn btn-outline-dark"><strong>Maps</strong></a>
 		</div>
 		{% endif %}
 
-
-
 			<div class = "col">
 				<form method = "get" action = "{% url 'edit_profile' %}">
-					<!-- <strong> Update Profile</strong> -->
-
 					<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Update Profile </strong></button>
 				</form>
 			</div>
 
 			{% if user.donor == False %}
-			<div class = "col">
-				<form method = "post" action = "{% url 'showNearbyDonors' %}"> {%csrf_token%}
-					<button type = "submit" class = "btn btn-outline-dark navbar-btn"><strong> Request </strong> </button>
-				</form>
-			</div>
+				<div class = "col">
+					<a href="{% url 'showNearbyDonors' %}" class="btn btn-outline-dark"><strong>Request</strong></a>
+				</div>
 			{% else %}
-			<div class = "col">
-				<form method = "post" action = "{% url 'showNearbyRecievers' %}"> {% csrf_token %}
-					<button type = "submit" class = "btn btn-outline-dark navbar-btn"><strong> Donate</strong> </button>
-				</form>
-			</div>
+				<div class = "col">
+			  	<a href="{% url 'showNearbyRecievers' %}" class="btn btn-outline-dark"><strong>Donate</strong></a>
+				</div>
 			{% endif %}
 
 			<div class = "col">
-				<form method = "post" action = "{% url 'logout' %}">
-					{% csrf_token %}
-					<!-- <button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Logout</strong> </button> -->
-					<button type = "submit" class = "btn btn-outline-dark"><strong> Logout </button>
-				</form>
+				<a href="{% url 'logout' %}" class="btn btn-outline-dark"><strong>Logout</strong></a>
 			</div>
 	{% else %}
-		<form method = "post" action = "{% url 'login' %}">
-			{% csrf_token %}
-			<button class = "btn btn-outline-dark navbar-btn" type = "submit"><strong>  Login </strong> </button>
-			<button class = "btn btn-outline-dark navbar-btn" type = "submit" formaction="{% url 'signup' %}"><strong> Sign Up</strong> </button>
-		 </form>
-		<!-- <form method="post" action="{% url 'signup' %}">
-			{% csrf_token %}
-			<button class = "btn btn-outline-dark navbar-btn" type = "submit" ><strong> Sign Up</strong> </button>
-		</form>
- -->
-
-				
-		{% endif %}
+		<div class = "col - 1">
+		 <a href="{% url 'login' %}" class="btn btn-outline-dark"><strong>Login</strong></a>
+		</div>
+		<div class = "col - 1">
+		 <a href="{% url 'signup' %}" class="btn btn-outline-dark"><strong>Sign Up</strong></a>	
+		 </div>		
+	{% endif %}
 
 				</div>
 {% endblock %}
@@ -102,15 +68,14 @@
 			{% else %}
 			Welcome, <kbd> {{ user.username }} </kbd>
 			{% endif %}
-		 <br> Your given information - <br> <hr style="border-width: 1.5px;background: black">
-		 <!-- <div class = "container-fluid" style="border:1px solid #36160F;"> -->
+		 <br> Your given information - <br> <hr style="border-width: 1px;background: black">
 		 	{% if user.donor == True %}
 		 		{% if user.organisation == True %}
-				You are a "Donor | Organisation"<br>
+					You are a "Donor : Organisation"<br>
 				{% else %}
-				You are a "Donor"
+					You are a "Donor"
 				{% endif %}
-				You have Food Packets available for - <strong> {{ user.resources }} </strong> People.<br>
+					You have Food Packets available for - <strong> {{ user.resources }} </strong> People.<br>
 			{% else %}
 				You are a "Reciever"<br>
 				Food Packets Required for - <strong> {{user.resources}} </strong> People.<br>
@@ -121,39 +86,24 @@
 			Pin-Code: {{ user.pin_code }} <br>
 			Contact No: {{ user.contact_no }} <br> <hr>
 </div>
-<!-- TRYING ALERT!!! -->
 <br>
 
-      <div class="alert alert-primary alert-dismissible fade show">
-    Please change the location on profile if logging in from a different location!! <br> 
+      <div class="alert  alert-primary  alert-dismissible   fade    show">
+    	Please change the location on profile if logging in from a different location!! <br> 
           Edit location here -  <u> <a  href = "{% url 'edit_profile' %}"> edit </a> </u> or located on the navigation bar as <u>Update Profile </u>!
-       <button type = "button" class = "close" data-dismiss = "alert" aria-hidden="true">&times;</button>
-        
-        <!-- <button type="button" class="close" data-dismiss="alert">&times;</button> -->
-  </div>
+      	 <button type = "button" class = "close" data-dismiss = "alert" aria-hidden="true">&times;</button>
+      </div>
 
   <!-- CHECKING  FOR LOCATION -->
   <div class = "alert alert-danger alert-dismissible fade show">
-  		Note : Some locations can't be located because of some maps issues, so map integration is in beta phase. <br> Click down to check if your location can be located or not - 
-  		
-  		<!-- <form> {% csrf_token %}
-  		<button class = "btn btn-outline-dark" style="font-size:13px" formaction="{% url 'check_location' %}"> Check </button>
-  		</form -->
-  		<a href="{% url 'check_location' %}" class="btn btn-outline-dark" style="font-size:11px"> <strong> Check </strong></a>
-
-
-  	<!-- 	<button type = "button" class = "close" data-dismiss = "alert" aria-hidden = "true"> &times; </button> -->
+  		Note : Some locations can't be located because of some maps issues, so map integration is in beta phase. <br> Click down to check if your location can be located or not -  <a href="{% url 'check_location' %}" class="btn btn-outline-dark" style="font-size:11px"> <strong> Check </strong></a>
   </div>
 <br>
 			
 	{% else %}
-	<br>
-	<div class = "container-fluid">
-		<h4> <kbd> You are not logged in! </kbd><br> <br>  </h4>
-	</div>
+		<br>
+		<div class = "container-fluid"> <h4> <kbd> You are not logged in! </kbd><br> <br>  </h4>    </div>
 	{% endif %}
-
-		
 
 {% endblock %}
 
