@@ -16,6 +16,8 @@
 	<form method="post" action = "{% url 'logout_view' %}"> {% csrf_token %}
 	<!-- {{ form }} -->
 	<button class = "btn btn-outline-dark" type="submit"> logout</button>
+
+	
 </form>
 
 {% else %}
