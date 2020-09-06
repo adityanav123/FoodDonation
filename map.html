@@ -29,6 +29,14 @@
       center: [-87.661557, 41.893748],
       zoom: 10.7
     });
+    map.addControl(
+        new mapboxgl.GeolocateControl({
+            positionOptions: {
+            enableHighAccuracy: true
+            },
+            trackUserLocation: true
+        })
+    );
     // code from the next step will go here
 
     var marker = new mapboxgl.Marker().setLngLat([-87.661557, 41.893748]).addTo(map);

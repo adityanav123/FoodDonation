@@ -1,25 +1,18 @@
 {% extends 'base_with_home.html' %}
 {% load crispy_forms_tags %}
-
-
 {% block title %} {{user.username}} | Messages {% endblock %}
 
 {% block navigation %}
 <div class = "row">
 	<div class = "col">
-		<form method = "post" action = "{% url 'homePage' %}">
-		{% csrf_token %}
-		<button class="btn btn-outline-dark" style="font-size:22px"><i class="fa fa-home"> Home</i></button>
-	</form>
-</div>
+		<a href="{% url 'homePage' %}" class="btn btn-outline-dark"><strong>Home</strong></a>
+	</div>
 	<div class = "col">
-				<form method = "get" action = "{% url 'edit_profile' %}">
-					<!-- <strong> Update Profile</strong> -->
-
+		<form method = "get" action = "{% url 'edit_profile' %}">
 					<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Update Profile </strong></button>
-				</form>
-			</div>
-		</div>
+		</form>
+	</div>
+</div>
 {% endblock %}
 
 {% block content %}
@@ -29,8 +22,8 @@
  					<th scope="col">  Username  </th>
  					<th scope="col"> Location </th>
  					<th scope="col"> Contact No. </th>
-					<th scope="col">    </th>
-					<th scope = "col">Status</th>
+					<th scope="col">  Message  </th>
+					<th scope = "col">Status </th>
 					<th scope="col"> Action </th>
 				</tr>
 			</thead>
@@ -50,19 +43,14 @@
 				</th>
 				<th scope = "row"> 
 					<div class = "row">
-					<div class = "col">
-					<form method = "post" action="{% url 'deleteNotification' i.pk %}"> {%csrf_token%}
-						<button class = "btn btn-outline-success" style="font-size:11px"><i class="material-icons" style="font-size:15px">eject</i> Delete</button>
-					</form>
-				</div>
-				<div class = "col">
-					<form method = "post" action="{% url 'readMessage' i.pk %}">{%csrf_token%}
-						<button class = "btn btn-outline-success" style="font-size:11px"><i class="material-icons" style="font-size:15px">offline_pin</i> Read</button>
-					</form>
-				</div>
-			</div>
+						<div class = "col">
+							<a href="{% url 'deleteNotification' i.pk %}" class="btn btn-danger"> <i class="material-icons" style="font-size:15px">eject</i><small> Delete Message</small></a>
+						</div>
+						<div class = "col">
+							<a href="{% url 'readMessage' i.pk %}" class="btn btn-info"> <i class="material-icons" style="font-size:15px">offline_pin</i><small> Mark Read </small></a>
+						</div>
+					</div>
 				</th>	
-
 			</tr>
 		{% endfor %}
 	

@@ -4,10 +4,7 @@
 {% block title %} Food Donation | Login {% endblock %}
 
 {% block navigation %}
-	<form method = "post" action = "{% url 'homePage' %}">
-		{% csrf_token %}
-		<button class="btn btn-outline-dark"><i class="fa fa-home"> Home</i></button>
-	</form>
+	<a href="{% url 'homePage' %}" class="btn btn-outline-dark" method = "post"><strong>Home</strong></a>
 {% endblock %}
 
 {% block content %}
@@ -20,18 +17,11 @@
  </form>
 <div class = "row">
 	<div class = "col-3">
-<form method = "post" action = "{% url 'signup' %}">
-	{% csrf_token %}
-	<button type = "submit" class = "btn btn-outline-dark btn-sm"> New User? Register Here </button>
-</form>
+<a href="{% url 'signup' %}" class="btn btn-outline-dark" method = "post"><small>New User? <strong> Register Here</strong></small> </a>
 </div>
 <div class = "col">
+<a href="{% url 'password_reset' %}" class="btn btn-outline-dark" method = "post"><small><strong>Forgot Password?</strong></small> </a> <br> <br>
 
-<form method = "post" action = "{% url 'password_reset' %}">
-	{% csrf_token%}
-	<button type = "submit" class = "btn btn-outline-dark btn-sm"> Forgot password? </button>
-
-</form>
 </div>
 </div>
 </div>
