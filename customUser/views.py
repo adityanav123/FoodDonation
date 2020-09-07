@@ -97,6 +97,8 @@ def main_page(request): ## TEMPORARY FIX
 @login_required(login_url="/users/login")
 def updateResources(request,emailid): # WHEN A REQUEST IS MADE BY THE RECIEVER, IT REDIRECTS HERE, to UPDATE THE RECIVER AND THE DONOR TO WHICH REQUEST IS MADE, THE NOTIFICATION LOGIC WOULD BE PRESENT HERE> JUST BEFORE REDIRECTING IT BACK TO THE PAGE.
 	you = request.user
+	if you.resources == 0:
+		return redirect('showNearbyDonors')
 	req = 0
 	them = CustomUser.objects.get(email = emailid)
 	if them.resources < you.resources:
@@ -149,6 +151,7 @@ def createMap(request):
 	lati,lang,users = [], [], []
 	near = CustomUser.objects.filter(city = user.city, donor = False)
 	merge = ""
+	# req = user.resoruces
 	if user.donor == True:
 		ans = CustomUser.objects.filter(city = user.city, donor = False)
 		for i in ans:
@@ -172,9 +175,11 @@ def show_nearby_recievers(request):
 	return render(request, 'show_recievers.html', {'you' : you, 'donors' : donors})
 
 @login_required(login_url = "/users/login")
-def donation_done(request, pk):
+def donation_done(request, email):
 	you = request.user
-	them = CustomUser.objects.get(pk = pk)
+	if you.resources == 0:
+		return redirect('showNearbyRecievers')
+	them = CustomUser.objects.get(email = email)
 	donationOf = 0 # resources donated.
 	if them.resources >= you.resources:
 		donationOf = them.resources
