@@ -172,9 +172,9 @@ def show_nearby_recievers(request):
 	return render(request, 'show_recievers.html', {'you' : you, 'donors' : donors})
 
 @login_required(login_url = "/users/login")
-def donation_done(request, emailid):
+def donation_done(request, pk):
 	you = request.user
-	them = CustomUser.objects.get(email = emailid)
+	them = CustomUser.objects.get(pk = pk)
 	donationOf = 0 # resources donated.
 	if them.resources >= you.resources:
 		donationOf = them.resources
