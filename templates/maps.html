@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 
-{% block title %} {{ user.username }} | Nearby {% endblock %}
+{% block title %} {{ user.username }} | MAP {% endblock %}
 {% block head %}
     <script src="https://d3js.org/d3.v3.min.js"></script>
     <script src="https://d3js.org/topojson.v0.min.js"></script>
@@ -60,7 +60,7 @@
 <script>
 	navigator.geolocation.getCurrentPosition(function(location) {
   var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
-  var mymap = L.map('mapid').setView(latlng, 11)
+  var mymap = L.map('mapid').setView(latlng, 15)
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     maxZoom: 18,
      id: 'mapbox.streets',
@@ -80,15 +80,25 @@
                 k++;
             {% endfor %}
             //document.getElementById("mapid").innerHTML = k;
+            // var l = 0;
+            // {% if users %}
+            //     {% for i in users %}
+            //         marker3[l] = {{ i.pk }}
+            //         l++;
+            //     {% endfor %}
+            // {% endif %}
 
 
             for(var m=0;m<mark1.length;m++) {
-                var circle = L.marker([mark1[m],mark2[m]], {
+                var circle = L.circleMarker([mark1[m],mark2[m]], {
                     color: 'red',
                     fillColor: '#f03',
                     fillOpacity: 1.5,
-                    radius: 50
+                    radius: 5
                 }).addTo(mymap);
+                // circle.bindPopup(
+                //     '<a href="{% url "donation_done" i.email %}" class="btn btn-outline-dark"  method = "post"><strong>Donate</strong></a>'
+                //     ).addTo(mymap);
             }
 
 });
