@@ -60,7 +60,7 @@
 <script>
 	navigator.geolocation.getCurrentPosition(function(location) {
   var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
-  var mymap = L.map('mapid').setView(latlng, 15)
+  var mymap = L.map('mapid').setView(latlng, 13)
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     maxZoom: 18,
      id: 'mapbox.streets',
@@ -79,16 +79,16 @@
                 mark2[k]={{ i }};
                 k++;
             {% endfor %}
-            //document.getElementById("mapid").innerHTML = k;
-            // var l = 0;
+
+            var pop_up = ['aditya'];
             // {% if users %}
             //     {% for i in users %}
-            //         marker3[l] = {{ i.pk }}
-            //         l++;
+            //          var st =  {{ 'i.state' }} 
+            //         pop_up.push( st );  // variable can only store integer values.
             //     {% endfor %}
             // {% endif %}
-
-
+            // document.getElementById('mapid').innerHTML = {{ i.contact_no }};
+            // document.get
             for(var m=0;m<mark1.length;m++) {
                 var circle = L.circleMarker([mark1[m],mark2[m]], {
                     color: 'red',
@@ -96,9 +96,7 @@
                     fillOpacity: 1.5,
                     radius: 5
                 }).addTo(mymap);
-                // circle.bindPopup(
-                //     '<a href="{% url "donation_done" i.email %}" class="btn btn-outline-dark"  method = "post"><strong>Donate</strong></a>'
-                //     ).addTo(mymap);
+               circle.bindPopup('' + pop_up[m]).openPopup();
             }
 
 });
