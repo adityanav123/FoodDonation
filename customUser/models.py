@@ -12,6 +12,7 @@ class CustomUser(AbstractUser):
                    ('1','Reciever')]"""
     state = models.CharField(max_length = 50, default = " ")
     donor = models.BooleanField(default = 'False') # 0 - Donor 1 - Reciever
+    reciever = models.BooleanField(default = "False")
     email = models.EmailField(unique=True)
     #user_type = models.ChoiceField(choices = CHOICES, widget = models.RadioSelect)
     organisation = models.BooleanField(default = 'False')
