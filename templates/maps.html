@@ -80,15 +80,13 @@
                 k++;
             {% endfor %}
 
-            var pop_up = ['aditya'];
-            // {% if users %}
-            //     {% for i in users %}
-            //          var st =  {{ 'i.state' }} 
-            //         pop_up.push( st );  // variable can only store integer values.
-            //     {% endfor %}
-            // {% endif %}
-            // document.getElementById('mapid').innerHTML = {{ i.contact_no }};
-            // document.get
+            var pop_up = [];
+            {% if users %}
+                {% for i in users %}
+                     var st =  " {{ i.username }} ";
+                    pop_up.push( st );  // variable can only store integer values.
+                {% endfor %}
+            {% endif %}
             for(var m=0;m<mark1.length;m++) {
                 var circle = L.circleMarker([mark1[m],mark2[m]], {
                     color: 'red',
@@ -96,7 +94,9 @@
                     fillOpacity: 1.5,
                     radius: 5
                 }).addTo(mymap);
-               circle.bindPopup('' + pop_up[m]).openPopup();
+                // var m1 = "mark3[m]";
+               circle.bindPopup(
+                '' + pop_up[m]).openPopup();
             }
 
 });

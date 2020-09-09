@@ -236,7 +236,7 @@ def ContactUs(request):
 			message = form.cleaned_data.get('message')
 			email = form.cleaned_data.get('email')
 			message = 'From - ' + email + '\n' + message
-			send_mail(subject = 'Someone Contacted!',from_email = 'FoodDonation<food.donation841@gmail.com>' ,message = message , recipient_list = 'food.donation841@gmail.com', fail_silently = False)
+			send_mail(subject = 'Someone Contacted!',from_email = 'FoodDonation<food.donation841@gmail.com>' ,message = message , recipient_list = ['food.donation841@gmail.com'], fail_silently = False)
 			return redirect('homePage')
 	else:
 		form = ContactUsForm()
