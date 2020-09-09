@@ -10,7 +10,7 @@
 {% endblock %}
 
 {% block content %}
-<h2> <kbd> Sign Up </kbd> </h2>
+<h2> Sign Up  </h2>
 <div class = "container-fluid" style="border:1px solid #36160F;">
 	<!-- <p> <strong> <u>  ** user_type field has two options only -> 0 for Donor and 1 for receiver <br> 
 		** can login as an organisation, fill accordingly. </u></strong>
@@ -73,9 +73,6 @@
 			<div class = "col">
 				{{form.password2 | as_crispy_field}}
 			</div>
-		</div>
-		<div class = "col">
-			{{form.password2 | as_crispy_field}}
 		</div>
 	</div>
 	<button type = "submit" class = "btn btn-success"> Sign Up </button>
