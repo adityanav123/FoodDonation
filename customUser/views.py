@@ -153,13 +153,15 @@ def createMap(request):
 	# req = user.resoruces
 	if user.donor == True:
 		ans = CustomUser.objects.filter(city = user.city, donor = False)
-		for i in ans:
-			temp_address = str(i.locality + ', ' + i.city + ', ' + str(i.pin_code) + ', ' + i.state)
-			#coord = locator.geocode(temp_address, timeout = 1000)
-			g1 = geocoder.mapbox(temp_address, key=API_KEY)
-			lati.append(g1.lat)
-			lang.append(g1.lng)
-			users.append(i)
+	else:
+		ans = CustomUser.objects.filter(city = user.city, donor = True)
+	for i in ans:
+		temp_address = str(i.locality + ', ' + i.city + ', ' + str(i.pin_code) + ', ' + i.state)
+		#coord = locator.geocode(temp_address, timeout = 1000)
+		g1 = geocoder.mapbox(temp_address, key=API_KEY)
+		lati.append(g1.lat)
+		lang.append(g1.lng)
+		users.append(i)
 	return render(request, 'maps.html', {'longitude' : g.lng, 'latitude' : g.lat,  'lat': lati, 'lang': lang, 'users': users, 'near' : near})
 
 
