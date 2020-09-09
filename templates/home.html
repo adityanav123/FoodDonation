@@ -20,16 +20,20 @@
 		</div>
 
 		{% if user.donor == True %}
-		<div class = "nav-item active">
-			<a href="{% url 'maps' %}" class="nav-link">Maps</a>
-		</div>
+			<div class = "nav-item active">
+				<a href="{% url 'maps' %}" class="nav-link">Donate</a>
+			</div>
+		{% else %}
+			<div class = "nav-item active">
+				<a href="{% url 'maps' %}" class="nav-link">Request</a>
+			</div>
 		{% endif %}
 
 			<div class = "nav-item active">
 					<a href="{% url 'edit_profile' %}" class="nav-link"> Update Profile </a>	
 			</div>
 
-			{% if user.donor == False %}
+			<!-- {% if user.donor == False %}
 				<div class = "nav-item active">
 					<a href="{% url 'showNearbyDonors' %}" class="nav-link">Request</a>
 				</div>
@@ -37,7 +41,7 @@
 				<div class = "nav-item active">
 			  	<a href="{% url 'showNearbyRecievers' %}" class="nav-link">Donate</a>
 				</div>
-			{% endif %}
+			{% endif %} -->
 			<div class = "nav-item active">
 				<form action="{% url 'contact' %}" method="get">
 				<!-- <a href="{% url 'contact' %}" class="nav-link">Contact Us</a> -->
