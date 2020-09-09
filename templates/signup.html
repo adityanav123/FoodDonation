@@ -19,25 +19,29 @@
 		{% csrf_token %}
 		<!-- FIRST ROW -->
 		<div class = "row">
-			<div class = "col-4"> <!-- col-value - shows how many column space the input string(here, username) is taking -->
+			<div class = "col"> <!-- col-value - shows how many column space the input string(here, username) is taking -->
 				{{ form.username | as_crispy_field }}
 			</div>
-			<div class = "col-4">
+			<div class = "col">
 				{{ form.email | as_crispy_field }}
 			</div>
-			<div class = "col-2">
+		</div>
+		<!-- temporary 2 row -->
+		<div class = "row">
+			<div class = "col">
 				{{form.organisation | as_crispy_field}}
 			</div>
-			<div class = "col-1">
-				{{form.donor | as_crispy_field}}
-			</div>
+			<!-- <div class = "col">
+				{{form.role | as_crispy_field}}
+			</div> -->
+			<!-- <div class = "col">
+				{{form.receiver | as_crispy_field}}
+			</div> -->
 		</div>
 
 		<!-- SECOND ROW  -->
 		<div class = "row">
-			<div class = "col-2">
-				{{form.receiver | as_crispy_field}}
-			</div>
+			
 			<div class = "col-3">
 				{{form.resources | as_crispy_field}}
 			</div>
