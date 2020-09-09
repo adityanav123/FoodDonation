@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
-from .forms import CustomUserCreationForm, CustomUserChangeForm, ContactUsForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm
 from .models import CustomUser, Messages, Locations
 from django.core.mail import send_mail
 from django.contrib.auth.forms import AuthenticationForm
@@ -89,9 +89,10 @@ def show_nearby_donors(request):
 
 
 ## HOME PAGE.. 
-def main_page(request): 
-	
-		return render(request, 'home.html')
+def main_page(request): ## TEMPORARY FIX
+	#message = Messages.objects.filter(reciever = request.user, read_unread = False).count()
+	return render(request, 'home.html')
+
 
 @login_required(login_url="/users/login")
 def updateResources(request,emailid): # WHEN A REQUEST IS MADE BY THE RECIEVER, IT REDIRECTS HERE, to UPDATE THE RECIVER AND THE DONOR TO WHICH REQUEST IS MADE, THE NOTIFICATION LOGIC WOULD BE PRESENT HERE> JUST BEFORE REDIRECTING IT BACK TO THE PAGE.
@@ -153,11 +154,9 @@ def createMap(request):
 	# req = user.resoruces
 	if user.donor == True:
 		ans = CustomUser.objects.filter(city = user.city, donor = False)
-	else:
-		ans = CustomUser.objects.filter(city = user.city, donor = True)
-	for i in ans:
-		if i.resources > 0:
+		for i in ans:
 			temp_address = str(i.locality + ', ' + i.city + ', ' + str(i.pin_code) + ', ' + i.state)
+			#coord = locator.geocode(temp_address, timeout = 1000)
 			g1 = geocoder.mapbox(temp_address, key=API_KEY)
 			lati.append(g1.lat)
 			lang.append(g1.lng)
@@ -218,6 +217,54 @@ def check_location(request):
 	msg.save()
 	return redirect('notification')
 
+
+# def login_view(request):
+
+# 	if request.method == "POST":
+# 		form = AuthenticationForm(request = request, data = request.POST)
+# 		if form.is_valid():
+# 			username = form.cleaned_data.get('username')
+# 			password = form.cleaned_data.get('password')
+#             user = authenticate(username=username, password=password)
+#             if user is not None:
+#             	login(request, user)
+#                 messages.info(request, f"You are now logged in as {username}")
+#                 return redirect('homePage')
+#             else:
+#                 messages.error(request, "Invalid username or password.")
+#         else:
+#             messages.error(request, "Invalid username or password.")
+#     form = AuthenticationForm()
+#     return render(request = request,
+#                     template_name = "test.html",
+#                     context={"form":form})
+
+
+# def login_view(request):
+# 	if request.method == "POST":
+# 		form = AuthenticationForm(request = request, data = request.POST)
+# 		if form.is_valid():
+# 			username = form.cleaned_data.get('username')
+# 			password = form.cleaned_data.get('password')
+# 			user = authenticate(username = username, password = password)
+# 			if user is not None:
+# 				login(request, user)
+# 				messages.info(request, f'You are now logged in as {username}')
+
+# 				return redirect('homePage')
+# 			else:
+# 				messages.error(request, 'invalid username/password!')
+# 		else:
+# 			messages.error(request, 'invalid username/password!')
+# 	form = AuthenticationForm()
+# 	return render(request, 'home_gc.html', {'form' : form}) 
+
+
+# def logout_request(request):
+#     logout(request)
+#     messages.info(request, "Logged out successfully!")
+#     return redirect("login_view")
+
 def calculate_coordinates(user, address): # TO STORE THE ADDRESS IN THE DATABASE.
 	g = geocoder.mapbox(address, key = API_KEY)
 	try:
@@ -230,16 +277,7 @@ def calculate_coordinates(user, address): # TO STORE THE ADDRESS IN THE DATABASE
 	if_present.longitude = g.lng
 	if_present.save()
 
+		
 
-def ContactUs(request):
-	if request.method == "POST":
-		form = ContactUsForm(request.POST)
-		if form.is_valid():
-			message = form.cleaned_data.get('message')
-			email = form.cleaned_data.get('email')
-			message = 'From - ' + email + '\n' + message
-			send_mail(subject = 'Someone Contacted!',from_email = 'FoodDonation<food.donation841@gmail.com>' ,message = message , recipient_list = ['food.donation841@gmail.com'], fail_silently = False)
-			return redirect('homePage')
-	else:
-		form = ContactUsForm()
-		return render(request, 'contact_us.html', { 'form' : form })
+
+ 

@@ -20,21 +20,24 @@
 		</div>
 
 		{% if user.donor == True %}
-			<div class = "nav-item active">
-				<a href="{% url 'maps' %}" class="nav-link">Donate</a>
-			</div>
-		{% else %}
-			<div class = "nav-item active">
-				<a href="{% url 'maps' %}" class="nav-link">Request</a>
-			</div>
+		<div class = "nav-item active">
+			<a href="{% url 'maps' %}" class="nav-link">Maps</a>
+		</div>
 		{% endif %}
 
 			<div class = "nav-item active">
 					<a href="{% url 'edit_profile' %}" class="nav-link"> Update Profile </a>	
 			</div>
-			<div class = "nav-item active">
-				<a href = "{% url 'contact' %}" class = 'nav-link'> Contact Us </a>
-			</div>
+
+			{% if user.donor == False %}
+				<div class = "nav-item active">
+					<a href="{% url 'showNearbyDonors' %}" class="nav-link">Request</a>
+				</div>
+			{% else %}
+				<div class = "nav-item active">
+			  	<a href="{% url 'showNearbyRecievers' %}" class="nav-link">Donate</a>
+				</div>
+			{% endif %}
 
 			<div class = "nav-item active">
 				<a href="{% url 'logout' %}" class="nav-link">Logout</a>
@@ -99,6 +102,7 @@
 		<br>
 		<div class = "container-fluid"> <h4> <kbd> You are not logged in! </kbd><br> <br>  </h4>    </div>
 	{% endif %}
+
 {% endblock %}
 
 

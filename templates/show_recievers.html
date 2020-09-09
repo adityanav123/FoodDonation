@@ -19,7 +19,6 @@
 				<tr>
 					<th scope="col"> Person/Organisation </th>
 					<th scope="col"> Location </th>
-					<th scope ="col"> Contact No. </th>
 					<th scope="col"> Required Food for </th>
 					<th scope ="col"> Donate Link </th>
 				</tr>
@@ -30,7 +29,6 @@
 				<tr>
 				<th scope="row"> {{ i.username }}  </th>
 				<th scope="row"> {{ i.locality }}, {{ i.city }} </th>
-				<th scope = "row"> {{ i.contact_no }} </th>
 				<th scope="row"> {{ i.resources }} People </th>
 				<th scope="row"> 
 					<a href="{% url 'donation_done' i.email %}" class="btn btn-outline-dark"  method = "post"><strong>Donate</strong></a>
