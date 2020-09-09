@@ -43,7 +43,7 @@
 {% endblock %}
 
 {% block content %}
- <h1>Nearby Receiver</h1>
+ <!-- <h1>Nearby Receiver</h1>
         {% if users %}
         <ul>
         {% for i in users %}
@@ -52,7 +52,7 @@
             </li>
         {% endfor %}
         </ul>
-        {% endif %}
+        {% endif %} -->
  <div class="map-responsive container-fluid">
  <div id="mapid"></div>
  </div>
@@ -60,7 +60,7 @@
 <script>
 	navigator.geolocation.getCurrentPosition(function(location) {
   var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
-  var mymap = L.map('mapid').setView(latlng, 15)
+  var mymap = L.map('mapid').setView(latlng, 13)
   L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     maxZoom: 18,
      id: 'mapbox.streets',
@@ -79,29 +79,75 @@
                 mark2[k]={{ i }};
                 k++;
             {% endfor %}
-            //document.getElementById("mapid").innerHTML = k;
-            // var l = 0;
-            // {% if users %}
-            //     {% for i in users %}
-            //         marker3[l] = {{ i.pk }}
-            //         l++;
-            //     {% endfor %}
-            // {% endif %}
 
-
+            var pop_up = [];
+            {% if users %}
+                {% for i in users %}
+                        var st =  " {{ i.username }}, {{ i.contact_no }} ";
+                        pop_up.push( st );  // variable can only store integer values.
+                {% endfor %}
+            {% endif %}
             for(var m=0;m<mark1.length;m++) {
-                var circle = L.circleMarker([mark1[m],mark2[m]], {
+                var circle = L.marker([mark1[m],mark2[m]], {
                     color: 'red',
                     fillColor: '#f03',
                     fillOpacity: 1.5,
                     radius: 5
                 }).addTo(mymap);
-                // circle.bindPopup(
-                //     '<a href="{% url "donation_done" i.email %}" class="btn btn-outline-dark"  method = "post"><strong>Donate</strong></a>'
-                //     ).addTo(mymap);
+               circle.bindPopup(
+                '' + pop_up[m]).openPopup();
             }
 
 });
 </script>
+    
+    <table class = "table" style="border: 0px solid black;">
+            <thead>
+                <tr>
+                    <th scope="col"> Person/Organisation </th>
+                    <th scope="col"> Location </th>
+                    <th scope ="col"> Contact No. </th>
+                    <th scope="col"> Resources </th>
+                    <th scope ="col"> Donate/Request Link </th>
+                </tr>
+            </thead>
+            <tbody>
 
+    {% if user.donor == True %}
+        
+    {% for i in users %}
+        {% if i.username != 'admin' and i.donor == False and i.resources > 0 %}
+                <tr>
+                <th scope="row"> {{ i.username }}  </th>
+                <th scope="row"> {{ i.locality }}, {{ i.city }} </th>
+                <th scope = "row"> {{ i.contact_no }} </th>
+                <th scope="row"> {{ i.resources }} People </th>
+                <th scope="row"> 
+                    <a href="{% url 'donation_done' i.email %}" class="btn btn-outline-dark"  method = "post"><strong>Donate</strong></a>
+                </th>
+            </tr>
+        {% endif %}
+    
+    {% endfor %}
+    </tbody>
+            </table>
+        {% else %}
+    {% endif %}
+    {% for i in users %}
+        {% if i.username != 'admin' and i.donor == True and i.resources > 0%}
+                <tr>
+                    <th scope="row"> {{ i.username }}  </th>
+                    <th scope="row"> {{ i.locality }}, {{ i.city }} </th>
+                    <th scope="row"> {{ i.contact_no }} </th>
+                    <th scope="row"> {{ i.resources }} </th>
+                    <th scope="row"> 
+            <a href="{% url 'update_requirements' i.email %}" class="btn btn-outline-info" method = "get"><strong>Request</strong></a>
+                    </th>
+                </tr>
+        {% endif %}
+    
+    {% endfor %}
+    </tbody>
+            </table>
+<br> <br> <br>
 {% endblock %}

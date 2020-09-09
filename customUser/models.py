@@ -7,7 +7,7 @@ class CustomUser(AbstractUser):
     contact_no = models.IntegerField(null = True)
     resources = models.IntegerField(null = True) # no. of persons avability/requirement
     locality = models.CharField(max_length = 100)
-    city = models.CharField(max_length = 50)
+    city =models.CharField(max_length = 100)
     """CHOICES=[('0','Donor'),
                    ('1','Reciever')]"""
     state = models.CharField(max_length = 50, default = " ")
