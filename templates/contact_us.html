@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}Contact Us {% endblock %}
+{% block navigation %}
+		<a href="{% url 'homePage' %}" class="btn btn-outline-dark" method = "get"><strong>Home</strong></a>
+{% endblock %}
+{% block content %}
+<h3> Contact Us </h3>
+<form method="post"> {% csrf_token %}
+	{{ form.name | as_crispy_field }}
+	{{ form.email | as_crispy_field}}
+	{{ form.message | as_crispy_field}}
+	<button class = "btn btn-outline-dark" type="submit"> Contact Us </button>
+</form>
+{% endblock %}

@@ -38,6 +38,13 @@
 			  	<a href="{% url 'showNearbyRecievers' %}" class="nav-link">Donate</a>
 				</div>
 			{% endif %}
+			<div class = "nav-item active">
+				<form action="{% url 'contact' %}" method="get">
+				<!-- <a href="{% url 'contact' %}" class="nav-link">Contact Us</a> -->
+				<!-- <button type="submit"> Contact Us </button> -->
+				<a href = "{% url 'contact' %}" class = 'nav-link'> Contact Us </a>
+				</form>
+			</div>
 
 			<div class = "nav-item active">
 				<a href="{% url 'logout' %}" class="nav-link">Logout</a>
@@ -102,6 +109,12 @@
 		<br>
 		<div class = "container-fluid"> <h4> <kbd> You are not logged in! </kbd><br> <br>  </h4>    </div>
 	{% endif %}
+
+	<!-- <h3> <kbd> contact us </kbd> </h3>
+	<form method = 'post'>
+		{{ form.as_p }}
+		<button class = "btn btn-outline-dark" type="submit">Send Message </button>
+	</form> -->
 
 {% endblock %}
 
