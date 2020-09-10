@@ -12,36 +12,28 @@
 {% block content %}
 <h2> Sign Up  </h2>
 <div class = "container-fluid" style="border:1px solid #36160F;">
-	<!-- <p> <strong> <u>  ** user_type field has two options only -> 0 for Donor and 1 for receiver <br> 
-		** can login as an organisation, fill accordingly. </u></strong>
-	</p> -->
-	<form method = "post">
+	<form method = "post" action="{% url 'login' %}">
 		{% csrf_token %}
 		<!-- FIRST ROW -->
 		<div class = "row">
-			<div class = "col"> <!-- col-value - shows how many column space the input string(here, username) is taking -->
+			<div class = "col"> 
 				{{ form.username | as_crispy_field }}
 			</div>
 			<div class = "col">
 				{{ form.email | as_crispy_field }}
 			</div>
-		</div>
-		<!-- temporary 2 row -->
-		<div class = "row">
+		<!-- </div>
+		<div class = "row"> -->
 			<div class = "col">
 				{{form.organisation | as_crispy_field}}
 			</div>
 			<div class = "col">
 				{{form.donor | as_crispy_field}}
 			</div>
-			<div class = "col">
-				{{form.receiver | as_crispy_field}}
-			</div>
 		</div>
 
 		<!-- SECOND ROW  -->
 		<div class = "row">
-			
 			<div class = "col-3">
 				{{form.resources | as_crispy_field}}
 			</div>
