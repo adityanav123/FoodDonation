@@ -3,6 +3,7 @@
 
 {% block title %} {{ user.username }} | MAP {% endblock %}
 {% block head %}
+ <meta http-equiv="refresh" content="10">
     <script src="https://d3js.org/d3.v3.min.js"></script>
     <script src="https://d3js.org/topojson.v0.min.js"></script>
     <link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.css" />
@@ -11,63 +12,131 @@
     #mapid {
     left:0;
     top:0;
-    height:50%;
-    width:70%;
+    height:86%;
+    width:100%;
     position:absolute;
+        border-radius: 5px;
 
 }
     .map-responsive{
     overflow:hidden;
-    padding-bottom:76.25%;
+    padding-bottom:50.25%;
     position:relative;
     height:0;
 
     }
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  width: 100%;
+  border: 1px solid #ddd;
+}
+
+th, td {
+  text-align: center;
+  padding: 8px;
+}
+
+tr:nth-child(even){background-color: #f2f2f2}
 </style>
 {% endblock %}
 {% block navigation %}
-	<div class = "row">
-		<div class = "col">
-	<form method = "post" action = "{% url 'homePage' %}">
-		{% csrf_token %}
-		<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong>Home </strong></button>
-	</form>
+    <div class = "row">
+        <div class = "col">
+    <form method = "post" action = "{% url 'homePage' %}">
+        {% csrf_token %}
+        <button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong>Home </strong></button>
+    </form>
 </div>
 <div class = "col">
-			<form method = "get" action = "{% url 'edit_profile' %}">
-				{% csrf_token %}
-				<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Update Profile </strong></button>
-			</form>
-		</div>
-	</div>
+            <form method = "get" action = "{% url 'edit_profile' %}">
+                {% csrf_token %}
+                <button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Update Profile </strong></button>
+            </form>
+        </div>
+    </div>
 {% endblock %}
 
 {% block content %}
- <h1>Nearby Receiver</h1>
-        {% if users %}
-        <ul>
-        {% for i in users %}
-            <li>
-            {{ i.username }}
-            </li>
-        {% endfor %}
-        </ul>
-        {% endif %}
+<div class = "alert alert-primary alert-dismissible fade show">
+        Note : <strong> Since this page checks your location in real-time, it would be better to give location access, and for real time location, this page will be refreshed after every 5-10 seconds</strong>
+  </div>
+<br>
+{% if user.Donor == True %}
+<h6> <strong> You have resource(s) for - <kbd> {{ user.resources }}</kbd> people.</strong></h6>
+    {% else %}
+<h6> <strong> You require resource(s) for - <kbd> {{ user.resources }}</kbd> people.</strong></h6>
+{% endif %}
  <div class="map-responsive container-fluid">
  <div id="mapid"></div>
  </div>
+ {% if user.Donor == True %}
+      <h3> Nearby Receivers  </h3>
+    {% else %}
+      <h3> Nearby Donors </h3>
+ {% endif %}
+
+     <div style="overflow-x:auto;">
+    <table class = "table" style="border: 0px solid black;">
+            <thead>
+                <tr align="center">
+                    <th scope="col"> Person/Organisation </th>
+                    <th scope="col"> Location </th>
+                    <th scope ="col"> Contact No. </th>
+                    <th scope="col"> Resources </th>
+                    <th scope ="col"> Donate/Request Link </th>
+                </tr>
+            </thead>
+
+            <tbody>
+    {% if user.donor == True %}
+
+    {% for i in users %}
+        {% if i.username != 'admin' and i.donor == False and i.resources > 0 %}
+                <tr>
+                <th scope="row"> {{ i.username }}  </th>
+                <th scope="row"> {{ i.locality }}, {{ i.city }} </th>
+                <th scope = "row"> {{ i.contact_no }} </th>
+                <th scope="row"> {{ i.resources }} People </th>
+                <th scope="row">
+                    <a href="{% url 'donation_done' i.email %}" class="btn btn-sm btn-success"  method = "post"><strong>Donate</strong></a>
+                </th>
+            </tr>
+        {% endif %}
+
+    {% endfor %}
+
+        {% else %}
+    {% endif %}
+    {% for i in users %}
+        {% if i.username != 'admin' and i.donor == True and i.resources > 0%}
+                <tr>
+                    <th scope="row"> {{ i.username }}  </th>
+                    <th scope="row"> {{ i.locality }}, {{ i.city }} </th>
+                    <th scope="row"> {{ i.contact_no }} </th>
+                    <th scope="row"> {{ i.resources }} </th>
+                    <th scope="row">
+            <a href="{% url 'update_requirements' i.email %}" class="btn btn-outline-info" method = "get"><strong>Request</strong></a>
+                    </th>
+                </tr>
+        {% endif %}
+
+    {% endfor %}
+    </tbody>
+        </table></div>
+<br>
 
 <script>
-	navigator.geolocation.getCurrentPosition(function(location) {
-  var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
-  var mymap = L.map('mapid').setView(latlng, 15)
-  L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-    maxZoom: 18,
-     id: 'mapbox.streets',
-    accessToken: 'pk.eyJ1IjoiYmJyb29rMTU0IiwiYSI6ImNpcXN3dnJrdDAwMGNmd250bjhvZXpnbWsifQ.Nf9Zkfchos577IanoKMoYQ'
-  }).addTo(mymap);
+    navigator.geolocation.getCurrentPosition(function(location) {
+    var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+    var mymap = L.map('mapid').setView(latlng, 13)
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+        maxZoom: 18,
+         id: 'mapbox.streets',
+        accessToken: 'pk.eyJ1IjoiYmJyb29rMTU0IiwiYSI6ImNpcXN3dnJrdDAwMGNmd250bjhvZXpnbWsifQ.Nf9Zkfchos577IanoKMoYQ'
+      }).addTo(mymap);
 
-  var marker = L.circleMarker(latlng).addTo(mymap);
+     var marker = L.circleMarker(latlng).addTo(mymap);
             mark1=[];
             mark2=[];
             var j=0,k=0;
@@ -79,26 +148,23 @@
                 mark2[k]={{ i }};
                 k++;
             {% endfor %}
-            //document.getElementById("mapid").innerHTML = k;
-            // var l = 0;
-            // {% if users %}
-            //     {% for i in users %}
-            //         marker3[l] = {{ i.pk }}
-            //         l++;
-            //     {% endfor %}
-            // {% endif %}
 
-
+            var pop_up = [];
+            {% if users %}
+                {% for i in users %}
+                        var st =  " {{ i.username }}, {{ i.contact_no }} ";
+                        pop_up.push( st );
+                {% endfor %}
+            {% endif %}
             for(var m=0;m<mark1.length;m++) {
-                var circle = L.circleMarker([mark1[m],mark2[m]], {
+                var circle = L.marker([mark1[m],mark2[m]], {
                     color: 'red',
                     fillColor: '#f03',
                     fillOpacity: 1.5,
                     radius: 5
                 }).addTo(mymap);
-                // circle.bindPopup(
-                //     '<a href="{% url "donation_done" i.email %}" class="btn btn-outline-dark"  method = "post"><strong>Donate</strong></a>'
-                //     ).addTo(mymap);
+               circle.bindPopup(
+                '' + pop_up[m]).openPopup();
             }
 
 });
