@@ -1,4 +1,3 @@
-
 {% extends 'base.html' %}
 
 {% load crispy_forms_tags %}
@@ -10,24 +9,28 @@
 {% endblock %}
 
 {% block content %}
-<h2> Sign Up  </h2>
+<h2> <kbd> Sign Up </kbd> </h2>
+<div class = "alert alert-primary alert-dismissible fade show">
+        Note :  By default the user will be a <strong> RECEIVER</strong>, select accordingly.
+  </div>
 <div class = "container-fluid" style="border:1px solid #36160F;">
-	<form method = "post" action="{% url 'login' %}">
+	<!-- <p> <strong> <u>  ** user_type field has two options only -> 0 for Donor and 1 for receiver <br> 
+		** can login as an organisation, fill accordingly. </u></strong>
+	</p> -->
+	<form method = "post">
 		{% csrf_token %}
 		<!-- FIRST ROW -->
 		<div class = "row">
-			<div class = "col"> 
+			<div class = "col-4"> <!-- col-value - shows how many column space the input string(here, username) is taking -->
 				{{ form.username | as_crispy_field }}
 			</div>
-			<div class = "col">
+			<div class = "col-4">
 				{{ form.email | as_crispy_field }}
 			</div>
-		<!-- </div>
-		<div class = "row"> -->
-			<div class = "col">
+			<div class = "col-2">
 				{{form.organisation | as_crispy_field}}
 			</div>
-			<div class = "col">
+			<div class = "col-1">
 				{{form.donor | as_crispy_field}}
 			</div>
 		</div>
@@ -73,4 +76,3 @@
 <br> <br>
 </div>
 {% endblock %}
-
