@@ -7,14 +7,38 @@
 
 <!-- INSERTING LINKS IN THE NAVIGATION BAR -->
 {% block navigation %}
-  <a href="{% url 'homePage' %}" class="btn btn-outline-dark"><strong>Home</strong></a>
+		<div class = "nav-item active"> 
+			<a class="nav-link" href="{% url 'notification' %}" >Notification</a>
+		</div>
+
+		<div class = "nav-item active">
+			<a class="nav-link" href="{% url 'maps' %}" class="nav-link">
+				{% if user.donor == True %}  Donate   {% else %}  Request 
+				{% endif %}
+			</a>
+			</div>
+			<div class = "nav-item active">
+					<a href="{% url 'edit_profile' %}" class="nav-link"> Update Profile </a>	
+			</div>
+			<div class = "nav-item active">
+				<a href = "{% url 'contact' %}" class = 'nav-link'> Contact Us </a>
+			</div>
+
+			<div class = "nav-item active">
+				<a href="{% url 'logout' %}" class="nav-link">Logout</a>
+			</div>
+			
+  <!-- <a href="{% url 'homePage' %}" class="btn btn-outline-dark"><strong>Home</strong></a>
   <div class = "col-3">
 		<a href="{% url 'logout' %}" class="btn btn-outline-dark"><strong>Logout</strong></a>
-  </div>
+  </div> -->
 {% endblock %}
 
 {% block content %}
-<h2> <kbd> Update Profile </kbd> </h2> <br> 
+<div class="container my-2" style="border:2px solid #cecece;">
+<h2 class="py-3" style="color: rgb(54, 111, 216); border-bottom:2px solid #cecece;"> Update Profile  </h2> 
+
+<br> 
 <div class = "container">
 <form method = "post">
 	{%csrf_token%}
@@ -26,10 +50,12 @@
 		<div class = "col">
 			{{ form.email | as_crispy_field }}
 		</div>
-		<div class = "col-1">
+	</div>
+	<div class="row">
+		<div class = "col">
 			{{form.donor | as_crispy_field}}
 		</div>
-		<div class = "col-1">
+		<div class = "col">
 			{{form.organisation | as_crispy_field}}
 		</div>
 	</div>
@@ -52,10 +78,10 @@
 
 	<!-- THIRD ROW  -->
 	<div class = "row">
-		<div class = "col-2">
+		<div class = "col">
 			{{form.pin_code | as_crispy_field}}
 		</div>
-		<div class = "col-3">
+		<div class = "col">
 			{{form.contact_no | as_crispy_field}}
 		</div>
 	</div>
@@ -64,5 +90,6 @@
 	<button type = "submit" class = "btn btn-outline-success"> Update </button>
 </form>
 </div>
-<a href="{% url 'password_reset' %}" class="btn btn-outline-danger"><strong>Change Password</strong></a>
+<a href="{% url 'password_reset' %}" class="btn btn-outline-danger mb-3"><strong>Change Password</strong></a>
 {% endblock %}
+</div>
