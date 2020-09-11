@@ -2,14 +2,36 @@
 {% load crispy_forms_tags %}
 {% block title %}Contact Us {% endblock %}
 {% block navigation %}
-		<a href="{% url 'homePage' %}" class="btn btn-outline-dark" method = "get"><strong>Home</strong></a>
+	<div class = "nav-item active"> 
+		<a class="nav-link" href="{% url 'notification' %}" >Notification</a>
+	</div>
+
+	<div class = "nav-item active">
+		<a class="nav-link" href="{% url 'maps' %}" class="nav-link">
+			{% if user.donor == True %}  Donate   {% else %}  Request 
+			{% endif %}
+		</a>
+		</div>
+		<div class = "nav-item active">
+				<a href="{% url 'edit_profile' %}" class="nav-link"> Update Profile </a>	
+		</div>
+		<div class = "nav-item active">
+			<a href = "{% url 'contact' %}" class = 'nav-link'> Contact Us </a>
+		</div>
+
+		<div class = "nav-item active">
+			<a href="{% url 'logout' %}" class="nav-link">Logout</a>
+		</div>
+		<!-- <a href="{% url 'homePage' %}" class="btn btn-outline-dark" method = "get"><strong>Home</strong></a> -->
 {% endblock %}
 {% block content %}
-<h3> Contact Us </h3>
+<div class="container my-2" style="border:2px solid #cecece;">
+<h2 class="py-3" style="color: rgb(54, 111, 216); border-bottom:2px solid #cecece;"> Contact Us </h2>
 <form method="post" action = "{% url 'contact' %}"> {% csrf_token %}
 	{{ form.name | as_crispy_field }}
 	{{ form.email | as_crispy_field}}
 	{{ form.message | as_crispy_field}}
-	<button class = "btn btn-outline-dark" type="submit"> Contact Us </button>
+	<button class = "btn btn-outline-success" type="submit"> Send Message </button>
 </form>
+</div>
 {% endblock %}
