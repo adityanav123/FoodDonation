@@ -48,18 +48,18 @@
 {% endblock %}
 
 {% block content %}
+<div class="container my-2" style="border:2px solid #cecece;">
+<h1 class="py-3" style="color: rgb(54, 111, 216); border-bottom:2px solid #cecece;"> FOOD DONATION  </h1>
 
-	<h1> FOOD DONATION  </h1>
-
-<div class = "container-fluid" style="border:2px solid #36160F;">
+<div class = "container-fluid" >
 	{% if user.is_authenticated %}
 
 			{% if user.organisation == False %}
-			Hello <kbd> {{ user.username }}</kbd>
+			<h3 style="color: rgb(54, 111, 216);"> Hello {{ user.username }}</h3>
 			{% else %}
 			Welcome, <kbd> {{ user.username }} </kbd>
 			{% endif %}
-		 <br> Your given information - <br> <hr style="border-width: 1px;background: black">
+		 <br> Your given information - <br> <hr style="border-bottom:2px solid #cecece;">
 		 	{% if user.donor == True %}
 		 		{% if user.organisation == True %}
 					You are a "Donor : Organisation"<br>
@@ -89,7 +89,7 @@
 		<br>
 		<div class = "container-fluid"> <h4> <kbd> You are not logged in! </kbd><br> <br>  </h4>    </div>
 	{% endif %}
-
+</div>
 
 {% endblock %}
 
