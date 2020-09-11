@@ -29,10 +29,12 @@
 			<div class = "col-4">
 				{{ form.email | as_crispy_field }}
 			</div>
-			<div class = "col-2">
+		</div>
+		<div class="row">
+			<div class = "col">
 				{{form.organisation | as_crispy_field}}
 			</div>
-			<div class = "col-1">
+			<div class = "col">
 				{{form.donor | as_crispy_field}}
 			</div>
 		</div>
@@ -55,10 +57,10 @@
 
 		<!-- THIRD ROW  -->
 		<div class = "row">
-			<div class = "col-2">
+			<div class = "col">
 				{{form.pin_code | as_crispy_field}}
 			</div>
-			<div class = "col-3">
+			<div class = "col">
 				{{form.contact_no | as_crispy_field}}
 			</div>
 		</div>
@@ -74,7 +76,7 @@
 	</div>
 	<button type = "submit" class = "btn btn-success mb-3"> Sign Up </button>
 </form>
-<a href="{% url 'login' %}" class="btn btn-outline-dark mb-3"> <small> Already have an account? - <strong> Login </strong> </small></a>
+<a href="{% url 'login' %}" class="btn btn-outline-dark mb-3"> <small> Already have an account? -</small> <strong> Login </strong> </a>
 <!-- <br> <br> -->
 </div>
 {% endblock %}
