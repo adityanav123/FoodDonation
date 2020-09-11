@@ -12,7 +12,7 @@
 {% endblock %}
 
 {% block navigation %}
-	<div class = "row">
+	<!-- <div class = "row"> -->
 	{% if user.is_authenticated %}
 
 		<div class = "nav-item active"> 
@@ -20,7 +20,7 @@
 		</div>
 
 		 <div class = "nav-item active">
-              <a href="{% url 'maps' %}" class="nav-link">
+              <a class="nav-link" href="{% url 'maps' %}" class="nav-link">
                   {% if user.donor == True %}  Donate   {% else %}  Request 
                   {% endif %}
               </a>
@@ -44,7 +44,7 @@
 		 </div>		
 	{% endif %}
 
-				</div>
+				<!-- </div> -->
 {% endblock %}
 
 {% block content %}
