@@ -41,7 +41,32 @@ tr:nth-child(even){background-color: #f2f2f2}
 </style>
 {% endblock %}
 {% block navigation %}
-    <div class = "row">
+
+<div class = "nav-item active"> 
+    <a class="nav-link" href="{% url 'notification' %}" >Notification</a>
+</div>
+
+<div class = "nav-item active">
+    <a class="nav-link" href="{% url 'maps' %}" class="nav-link">
+        {% if user.donor == True %}  Donate   {% else %}  Request 
+        {% endif %}
+    </a>
+    </div>
+    <div class = "nav-item active">
+            <a href="{% url 'edit_profile' %}" class="nav-link"> Update Profile </a>	
+    </div>
+    <div class = "nav-item active">
+        <a href = "{% url 'contact' %}" class = 'nav-link'> Contact Us </a>
+    </div>
+
+    <div class = "nav-item active">
+        <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+    </div>
+
+<div class = "nav-item active"> 
+    <a class="nav-link" href="{% url 'homePage' %}" >To the Home Page</a>
+</div>
+    <!-- <div class = "row">
         <div class = "col">
     <form method = "post" action = "{% url 'homePage' %}">
         {% csrf_token %}
@@ -54,11 +79,12 @@ tr:nth-child(even){background-color: #f2f2f2}
                 <button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Update Profile </strong></button>
             </form>
         </div>
-    </div>
+    </div> -->
 {% endblock %}
 
 {% block content %}
-<div class = "alert alert-primary alert-dismissible fade show">
+<div class="container my-2" style="border:2px solid #cecece;">
+<div class = "alert alert-primary alert-dismissible fade show mt-2">
         Note : <strong> Since this page checks your location in real-time, it would be better to give location access, and for real time location, this page will be refreshed after every 5-10 seconds</strong>
   </div>
 <br>
@@ -169,5 +195,6 @@ tr:nth-child(even){background-color: #f2f2f2}
 
 });
 </script>
+</div>
 
 {% endblock %}
