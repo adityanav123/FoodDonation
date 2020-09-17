@@ -18,7 +18,7 @@
 {% block content %}
 	<div class="container my-2" style="border:2px solid #cecece;">
 <h2 class="py-3" style="color: rgb(54, 111, 216); border-bottom:2px solid #cecece;">Anonymus Donation/Request </h2>
-<form method="post" action = "{% url 'contact' %}"> {% csrf_token %}
+<form method="post" action = "{% url 'anonymusUserRequest' %}"> {% csrf_token %}
 	{{ form.name | as_crispy_field }}
 	{{ form.email | as_crispy_field}}
 	{{ form.resources | as_crispy_field }}

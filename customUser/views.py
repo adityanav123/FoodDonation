@@ -196,7 +196,7 @@ def AnonymusUserRequest(request):
 			email = form.cleaned_data.get('email')
 			name = form.cleaned_data.get( 'name')
 			resources = form.cleaned_data.get('resources')
-			message = '' + message + '\n Request/Donation for - ' + str(resources) + ' people\n. Contact the person.'
+			message = '' + message + '\nRequest/Donation for - ' + str(resources) + ' people.\nContact the person.\nEmail : ' + email + '\nName : ' + name
 			send_mail(subject = 'Anonymus User Request/Donation',  from_email = 'AnonymusUser<food.donation841@gmail.com>', message = message, recipient_list = ['support_fooddonation@protonmail.com'] , fail_silently = False)
 			return redirect('home')
 	else:
