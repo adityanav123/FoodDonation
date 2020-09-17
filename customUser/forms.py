@@ -21,7 +21,7 @@ class AnonymusUserForm(forms.Form):
     name = forms.CharField(max_length = 30)
     email = forms.EmailField(help_text = 'Please enter your valid email id, so that your request can be solved without issues.')
     resources = forms.IntegerField(help_text = 'For how many people do you want donation for?')
-    message = forms.CharField(widget = forms.Textarea(attrs={'placeholder':'Please specify, if you are contacting for a donation or requesting food.'}))
+    message = forms.CharField(widget = forms.Textarea(attrs={'placeholder':'Please specify extra details. :) '}))
 
 
 	
