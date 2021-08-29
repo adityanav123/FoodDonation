@@ -26,3 +26,4 @@
 # COLLABORATORS
 - Gunjan Choudhary (<a href="https://github.com/gunjanchoudharyjnv">Gunjan</a>)
 - Kartik Merotha (<a href="https://github.com/kartik11996">Kartik</a>)
+- Aditya Navphule (<a href="https://github.com/adityanav123">Aditya</a>)
