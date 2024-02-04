@@ -15,9 +15,6 @@
 - Using icons in buttons - https://mdbootstrap.com/docs/jquery/content/icons-list/
 
 
-- Crowd Sourcing :  The act of taking a job traditionally performed by a designated agent (employee) and giving it to generally to a large group of people in the form of an open call. 
-
-
 
 
 #ISSUES/ASSUMPTIONS - 
@@ -26,7 +23,7 @@
 
 
 
-
-
-
-
+# COLLABORATORS
+- Gunjan Choudhary (<a href="https://github.com/gunjanchoudharyjnv">Gunjan</a>)
+- Kartik Merotha (<a href="https://github.com/kartik11996">Kartik</a>)
+- Aditya Navphule (<a href="https://github.com/adityanav123">Aditya</a>)

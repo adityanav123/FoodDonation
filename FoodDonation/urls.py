@@ -31,4 +31,5 @@ urlpatterns = [
     path('users/', include('django.contrib.auth.urls')),
     #path('edit_user/', user_view.edit_form, name = 'edit_form'),
     path('main/', user_view.main_page, name = 'homePage'),
+    path('anonymus/', user_view.AnonymusUserRequest, name = 'anonymusUserRequest'),
 ]

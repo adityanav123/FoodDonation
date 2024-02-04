@@ -5,15 +5,20 @@
 {% block title %} Food Donation | Registration {% endblock %}
 
 {% block navigation %}
-	<a href="{% url 'homePage' %}" class="btn btn-outline-dark" method = "post"><strong>Home</strong></a>
+	<li class="nav-item active">
+		<a class="nav-link" href="{% url 'login' %}">Login <span class="sr-only">(current)</span></a>
+	</li>
+	<!-- <a href="{% url 'homePage' %}" class="btn btn-outline-dark" method = "post"><strong>Home</strong></a> -->
 {% endblock %}
 
 {% block content %}
-<h2> <kbd> Sign Up </kbd> </h2>
+<div class="container my-2" style="border:2px solid #cecece;">
+<h2 class="py-3" style="color: rgb(54, 111, 216); border-bottom:2px solid #cecece;"> Sign Up  </h2>
 <div class = "alert alert-primary alert-dismissible fade show">
         Note :  By default the user will be a <strong> RECEIVER</strong>, select accordingly.
   </div>
-<div class = "container-fluid" style="border:1px solid #36160F;">
+<div class = "container-fluid">
+	<!-- style="border:1px solid #36160F;" -->
 	<!-- <p> <strong> <u>  ** user_type field has two options only -> 0 for Donor and 1 for receiver <br> 
 		** can login as an organisation, fill accordingly. </u></strong>
 	</p> -->
@@ -27,10 +32,12 @@
 			<div class = "col-4">
 				{{ form.email | as_crispy_field }}
 			</div>
-			<div class = "col-2">
+		</div>
+		<div class="row">
+			<div class = "col">
 				{{form.organisation | as_crispy_field}}
 			</div>
-			<div class = "col-1">
+			<div class = "col">
 				{{form.donor | as_crispy_field}}
 			</div>
 		</div>
@@ -53,10 +60,10 @@
 
 		<!-- THIRD ROW  -->
 		<div class = "row">
-			<div class = "col-2">
+			<div class = "col">
 				{{form.pin_code | as_crispy_field}}
 			</div>
-			<div class = "col-3">
+			<div class = "col">
 				{{form.contact_no | as_crispy_field}}
 			</div>
 		</div>
@@ -70,9 +77,9 @@
 			</div>
 		</div>
 	</div>
-	<button type = "submit" class = "btn btn-success"> Sign Up </button>
+	<button type = "submit" class = "btn btn-success mb-3"> Sign Up </button>
 </form>
-<a href="{% url 'login' %}" class="btn btn-outline-dark"> <small> Already have an account? - <strong> Login </strong> </small></a>
-<br> <br>
+<a href="{% url 'login' %}" class="btn btn-outline-dark mb-3"> <small> Already have an account? -</small> <strong> Login </strong> </a>
+<!-- <br> <br> -->
 </div>
 {% endblock %}

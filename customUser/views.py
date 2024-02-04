@@ -2,7 +2,7 @@ from django.shortcuts import render, HttpResponse, redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView
 from django.contrib.auth.decorators import login_required
-from .forms import CustomUserCreationForm, CustomUserChangeForm, ContactUsForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm, ContactUsForm, AnonymusUserForm
 from .models import CustomUser, Messages, Locations
 from django.core.mail import send_mail
 from django.contrib.auth.forms import AuthenticationForm
@@ -186,3 +186,19 @@ def ContactUs(request):
 	else:
 		form = ContactUsForm()
 		return render(request, 'contact_us.html', { 'form' : form })
+
+
+def AnonymusUserRequest(request):
+	if request.method == "POST":
+		form = AnonymusUserForm(request.POST)
+		if form.is_valid():
+			message = form.cleaned_data.get('message')
+			email = form.cleaned_data.get('email')
+			name = form.cleaned_data.get( 'name')
+			resources = form.cleaned_data.get('resources')
+			message = '' + message + '\nRequest/Donation for - ' + str(resources) + ' people.\nContact the person.\nEmail : ' + email + '\nName : ' + name
+			send_mail(subject = 'Anonymus User Request/Donation',  from_email = 'AnonymusUser<food.donation841@gmail.com>', message = message, recipient_list = ['support_fooddonation@protonmail.com'] , fail_silently = False)
+			return redirect('home')
+	else:
+		form = AnonymusUserForm()
+		return render(request, 'anonymusUser.html', {'form' : form })

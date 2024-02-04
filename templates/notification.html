@@ -3,19 +3,41 @@
 {% block title %} {{user.username}} | Messages {% endblock %}
 
 {% block navigation %}
-<div class = "row">
-	<div class = "col">
-		<a href="{% url 'homePage' %}" class="btn btn-outline-dark"><strong>Home</strong></a>
+<!-- <div class = "row"> -->
+	<!-- <div class = "col">
+		<a href="{% url 'homePage' %}" class="btn btn-outline-dark"><strong>Homehii</strong></a>
+	</div> -->
+	<div class = "nav-item active"> 
+		<a class="nav-link" href="{% url 'notification' %}" >Notification</a>
 	</div>
-	<div class = "col">
+
+	 <div class = "nav-item active">
+		  <a class="nav-link" href="{% url 'maps' %}" class="nav-link">
+			  {% if user.donor == True %}  Donate   {% else %}  Request 
+			  {% endif %}
+		  </a>
+		</div>
+		<div class = "nav-item active">
+				<a href="{% url 'edit_profile' %}" class="nav-link"> Update Profile </a>	
+		</div>
+		<div class = "nav-item active">
+			<a href = "{% url 'contact' %}" class = 'nav-link'> Contact Us </a>
+		</div>
+
+		<div class = "nav-item active">
+			<a href="{% url 'logout' %}" class="nav-link">Logout</a>
+		</div>
+	<!-- <div class = "col">
 		<form method = "get" action = "{% url 'edit_profile' %}">
 					<button type = "submit" class = "btn btn-outline-dark navbar-btn"> <strong> Update Profile </strong></button>
 		</form>
-	</div>
+	</div> -->
 </div>
 {% endblock %}
 
 {% block content %}
+<div class="container my-2" style="border:2px solid #cecece;">
+	<h2 class="py-3" style="color: rgb(54, 111, 216); border-bottom:2px solid #cecece;"> Notification </h2>
 	<table class = "table">
 			<thead>
 				<tr>
@@ -52,6 +74,9 @@
 					</div>
 				</th>	
 			</tr>
+			</tbody>
+			</table>
+			</div>
 		{% endfor %}
 	
 {% endblock %}
